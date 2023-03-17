@@ -2,21 +2,22 @@ import JengaApisSdk from "jenga-apis-sdk";
 
 const sdk: JengaApisSdk = new JengaApisSdk({
   apiKey:
-    "eN8OFJ8+lQNNZQPcpJ/ma87ct7OCJVPSACt0gBY25KMJDDr1CsrjQoZlWk9w/RPEOGoYsXmKWyjLigFofYTCwA==",
+    "xBWk5Wsl9IFfciEQxkt2MeLHWLLeiDhdwtLW5Lqe9WI68MBO7C7DSwtNcMuMhIVIgV45E4K3krW3XN+quhg9pw==",
   merchantCode: "2179103820",
-  consumerSecret: "T30Mim1UA3v7QnFKtn24Qt7bUnl76T",
-  privateKeyPath: "absolute path to your private key",
+  consumerSecret: "RIl1IHN1xktI2wjAGE5Js5zm3s7052a",
+  privateKeyPath:
+    "/home/chariss/dev/personal/javascript/JengaSdk/privateKey.pem",
   env: "DEV",
 });
 sdk
   .authenticate()
   .then((r) => console.log(r))
-  .catch((r) => console.log("auth"));
-sdk
-  .airtimePurchase()
-  .then((r) => console.log(r))
-  .catch((r) => console.log("airtime"));
-sdk
-  .accountBalance()
-  .then((r) => console.log(r))
-  .catch((r) => console.log("balance", r));
+  .catch((r) => console.log("auth", r));
+// sdk
+//   .airtimePurchase()
+//   .then((r) => console.log(r))
+//   .catch((r) => console.log("airtime"));
+// sdk
+//   .accountBalance()
+//   .then((r) => console.log(r))
+//   .catch((r) => console.log("balance", r));

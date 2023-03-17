@@ -23,7 +23,9 @@ export abstract class Base {
     const url = `${this.baseUrl}${endpoint}`;
     const headers = {
       "Content-Type": "application/json",
+      ...options.headers,
     };
+    delete options.headers;
     const config = {
       ...options,
       headers,
