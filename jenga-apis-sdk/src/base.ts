@@ -1,4 +1,5 @@
 import fetch from "isomorphic-unfetch";
+import axios from "axios";
 
 export abstract class Base {
   private baseUrl = BaseUrl.DEV;
@@ -19,24 +20,27 @@ export abstract class Base {
     }
   }
 
-  protected request<T>(endpoint: string, options?: RequestInit): Promise<T> {
+  protected request<T>(
+    endpoint: string,
+    options?: RequestInit | any
+  ): Promise<T> {
     const url = `${this.baseUrl}${endpoint}`;
     const headers = {
       "Content-Type": "application/json",
       ...options.headers,
     };
     delete options.headers;
-    const config = {
+    const config: any = {
       ...options,
       headers,
     };
-
-    return fetch(url, config).then((response) => {
-      if (response.ok) {
-        return response.json();
-      }
-      throw new Error(response.statusText);
-    });
+    return axios(url, config);
+    // return fetch(url, config).then((response) => {
+    //   if (response.ok) {
+    //     return response.json();
+    //   }
+    //   throw new Error(response.statusText);
+    // });
   }
 }
 type Config = {

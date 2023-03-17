@@ -6,12 +6,12 @@ export const generateSignature = (rawText, privateKeyPath) => {
     const privateKey: any = readFileSync(privateKeyPath, {
       encoding: "utf8",
     });
-    console.log(rawText, privateKeyPath, privateKey);
+    // console.log(rawText, privateKeyPath, privateKey);
     const sign = createSign("SHA256");
     sign.write(rawText);
     sign.end();
     const signature = sign.sign(privateKey, "base64");
-    console.log(signature);
+    // console.log(signature);
     return signature;
   } catch (error) {
     throw new Error(error.toString());

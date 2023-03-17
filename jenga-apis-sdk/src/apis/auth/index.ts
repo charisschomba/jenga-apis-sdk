@@ -5,14 +5,18 @@ import { generateSignature } from "../../utils/signature";
 export class Auth extends Base {
   authenticate(): Promise<AuthResponse> {
     const signature = generateSignature("test", this.privateKeyPath);
-    console.log(signature);
+    // console.log(signature);
     return this.request("/authentication/api/v3/authenticate/merchant", {
       method: "POST",
       headers: { "Api-Key": this.apiKey },
-      body: JSON.stringify({
+      // body: JSON.stringify({
+      //   merchantCode: this.merchantCode,
+      //   consumerSecret: this.consumerSecret,
+      // }),
+      data: {
         merchantCode: this.merchantCode,
         consumerSecret: this.consumerSecret,
-      }),
+      },
     });
   }
 }
