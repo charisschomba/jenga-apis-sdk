@@ -1,0 +1,31 @@
+Arguments: 
+  /usr/bin/node /usr/local/bin/yarn add jenga-apis-sdk
+
+PATH: 
+  /home/chariss/Library/Android/sdk/platform-tools:/home/chariss/.pyenv/shims:/home/chariss/.pyenv/bin:/home/chariss/maven/bin:/home/chariss/.pyenv/bin:/home/chariss/maven/bin:/usr/local/bin:/usr/bin:/bin:/usr/games:/usr/sbin/:/snap/bin:/usr/sbin/:/snap/bin
+
+Yarn version: 
+  1.22.19
+
+Node version: 
+  16.19.0
+
+Platform: 
+  linux x64
+
+Trace: 
+  Error: EACCES: permission denied, mkdir '/home/chariss/dev/personal/javascript/JengaSdk/sdk-test/node_modules/asynckit'
+
+npm manifest: 
+  {
+    "name": "sdk-test",
+    "version": "1.0.0",
+    "main": "index.js",
+    "license": "MIT"
+  }
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile
