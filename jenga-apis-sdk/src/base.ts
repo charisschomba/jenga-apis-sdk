@@ -6,7 +6,7 @@ export abstract class Base {
   protected apiKey: string;
   protected merchantCode: string;
   protected consumerSecret: string;
-  protected env?: string = BaseUrl.DEV;
+  protected env?: string = BaseUrl.UAT;
   protected privateKeyPath: string;
 
   constructor(config: Config) {
@@ -22,7 +22,7 @@ export abstract class Base {
 
   protected request<T>(
     endpoint: string,
-    options?: RequestInit | any
+    options?: RequestInit | Options
   ): Promise<T> {
     const url = `${this.baseUrl}${endpoint}`;
     const headers = {
@@ -55,3 +55,8 @@ enum BaseUrl {
   UAT = "https://uat.finserve.africa",
   PROD = "https://api.finserve.africa",
 }
+type Options = {
+  headers?: any;
+  data?: any;
+  params?: any;
+};
