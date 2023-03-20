@@ -1,14 +1,15 @@
 import JengaApisSdk from "jenga-apis-sdk";
+
 const accessToken =
-  "eyJhbGciOiJSUzUxMiJ9.eyJ0b2tlblR5cGUiOiJNRVJDSEFOVCIsImVudiI6IkRFViIsImV4cCI6MTY3OTE3MjA0MCwiaWF0IjoxNjc5MDg1NjQwLCJhY2NvdW50IjoiOUQ0RjYwMDQwRTFGNjVCOUM0RTE0MjNGNjExREU0ODhFNjdENEY2M0MxNkRGRURFOThGRjlBNzg5QUNENzU4MEMxMDFDRTE3MzA4MEIxNjUxOTNFQUFFRkYwNkJBOURGRHhyaFAzdlo0UkhkMjJvSXJ5K21HeFJ6eDFoMWlzNDQzaGVHYjZpbS9XVzJGN3EwTmthU1AzVjZxalJ6dkNwb0ZHcEUxWVJYQk56cHFPTzFFWnZ2aCtuVjZ1SXVFZmdmR0ovbUpiOUUwK0F2T1ZjdTZjSnNnRTF0eFpmbFFUcGp0aXgvaWxaSjIrOXd4ZmhNTmNycm9qR3RFV2NpQWlwVDh4THRDbWFtNEd2emp3SEhGR0hXTmwrWkVHV0NmSnF4YjNXbmtaODhCa3duN0o3YWhEZkpYQXRLTlg4cnliY3A0K1Y4LzR3U2h2UHpNRDl2Z0s4R1Y0MG5tK1Y4MjlydGN6aGE1dW9hZU1KbExWcUV6Y3hQZkRCVjc5ckQ1aUR5cWc3TjJ5VlY3czZOOEE3UnVqSTRqY1ZVNDNGb3VGYjRTTjYzQ0FXOTkxbEh2YnlwTUZGNVJsamZFamhxUnUrOWQ2U2JFU2Q1a2lxZyswZHc5c3pMMmdjT3RUQkNaeGlWZVliQ2RTY3BmRU01cVh0QlZqaG5TRnJIRUQ3anNSOWFhdEt1clkyWGhUTT0ifQ.EqmB-RjEf7rr5Mfh_OkgKmF9s7vzfhWJCbxialUJ2W1ZGmlz0-So2VVVD4Med1oTMo6NnZEgdrA7yGPzfVdv-ssi4xkfL7sH0FRvCI6Sx-Voauh38dxI27Fpgp2m8S41q3sfo4mTQLfigyP0WHEn9sT6BoCyKObk_T-uvZU9xFrCFWdR2cs6nt0VTdCvVzPCcjPzT-IfAYnnc1FJ5isy5pM8tuGVVJfP9JcqQrOL8XgDMdg4mZIXRF63t5-YhQ_Ll0XGj0XixD3xM-bacpOr8YjtAjQHikSLmNEMQXB0bryz1AWDL0ZMpzAaYVT_HMatHLBAI9-I-PSJiPCDtqXZyA";
+  "eyJhbGciOiJSUzUxMiJ9.eyJ0b2tlblR5cGUiOiJNRVJDSEFOVCIsImVudiI6IlVBVCIsImV4cCI6MTY3OTMxNTUyMiwiaWF0IjoxNjc5MzE0NjIyLCJhY2NvdW50IjoiMEM1QUZFMThEOURCRkZEOTU5ODIyNjU2RjY1MUVDMDczN0FGNzE2RDdCQ0Y0MzlDRTg4RDEzMDU4RkQzQjFEQTAxNUM5NTk3Q0I4RDEyQTA1MjE4QTVCQjkwNTRFQUVCcERsRjFiRlY5eWhhbHA2SXByV3dzRjNBd2dCVEkrV1BKYjh3UUxtUmtXd0Z6NHRYblFaTFg1dkYyNDlyZTVCNlV3NnF1TEZmbVhUbHR6QzBKLzlsN3FvS0ZHV1NYRW5RWUluZUVSTHNrMlo1R0VGNVhqQWo5OFhHR0RkeXg1aVVWbHFWTmNvRis4Nld6T2VuNTNqMmlhc01tQ0g3RnU1TVdmZmd3Q1Zub20xaU5yM3UwZnN3NmlBMnkvM3pXamZjMStpMFhIeG1ObmtaSUYzZHNtRnhRcDJQNVoyNE5wdmJkc1A2YXVhczNGdVRUenQ2c3kvSWIrOTlVWmFjME1lMVdtRTdoQkZFY3Z3dGtRWVJpL2ovM3NNVFFYeE93M0x2Ulo1cXRkeko2TG9XNnhvTXZObW15VXlrakx2Zk9oMkluMG1Leld5ZnptZGdyUUREaUpyN2ExVjlTdlB0YmZGM1A4alBqcnZndGJrdHBXaWZFSjZOeWFIZFdiYWZxQkc4b2Y1RUwvRjBVZGFBV201NGEyRUpXZTBTRWN5aHVFTmVoTUFrcWpwa3lCOD0ifQ.m7xyTlTGPD78wISOJKGtpd0kJeO5Z7jP1_HEEgli7600T5hVVsPj4X8QZTIp4Aii2pieCQQTZbYINjfa_GSHCZx6a6kreHv360zjj7my8tQ-le_ChEZKaH7bWFPmK-aYKAbP375x6NG-9Mu8fdGHp5slxrlCSj7W26vbeNEhg1folZoIgOamMJBj46rAkcyLDOh8TashxSiY-AYdyBKOGRPBj-rlnIJVVTbZYK6QaRLJ1t_m35SATIQ__HX5JgGoddgBOMIksQc3hT9cgQuUY6k6xaPY3nCQbC2ez1nt9auE4OZ0cbfIY8AnT2A7a4mt5VZRBeZ-lsb592p6io2VCg";
 const sdk: JengaApisSdk = new JengaApisSdk({
   apiKey:
-    "xBWk5Wsl9IFfciEQxkt2MeLHWLLeiDhdwtLW5Lqe9WI68MBO7C7DSwtNcMuMhIVIgV45E4K3krW3XN+quhg9pw==",
-  merchantCode: "2179103820",
-  consumerSecret: "RIl1IHN1xktI2wjAGE5Js5zm3s7052",
-  privateKeyPath:
-    "/home/chariss/dev/personal/javascript/JengaSdk/privateKey.pem",
-  env: "DEV",
+    "B/xDKDWPMX5acekuX5QZF/8JIozvr40Xd+2RABniIRfwsO7gs4UuhwPJxthWpi14Y3JfSi+8JlkRO9xuL6DuVg==",
+  merchantCode: "4611458492",
+  consumerSecret: "2KR0Mgj6Ri26X29hayKfClQ6c2Mt0V",
+  privateKeyPath: "/home/chariss/dev/personal/javascript/JengaSdk/uat.pem",
+  env: "UAT",
+  enableLogging: true,
 });
 // sdk
 //   .generateToken()
@@ -18,13 +19,48 @@ const sdk: JengaApisSdk = new JengaApisSdk({
 //     console.log(r.response.data);
 //   });
 // sdk
-//   .airtimePurchase()
-//   .then((r) => console.log(r))
-//   .catch((r) => console.log("airtime"));
+//   .accountBalance({
+//     params: { countryCode: "KE", accountId: "1100194977404" },
+//     headers: { Authorization: `Bearer ${accessToken}` },
+//   })
+//   .then((r) => console.log(r.data))
+//   .catch((r) => console.log(r.response.data));
+
 sdk
-  .accountBalance({
-    params: { countryCode: "KE", accountId: "0020100014605" },
+  .accountMiniStatement({
+    params: { countryCode: "KE", accountNumber: "0020100014605" },
     headers: { Authorization: `Bearer ${accessToken}` },
   })
   .then((r) => console.log(r.data))
-  .catch((r) => console.log("balance", r.response.data));
+  .catch((r) => console.log(r.response.data));
+sdk
+  .accountFullStatement({
+    headers: { Authorization: `Bearer ${accessToken}` },
+    data: {
+      countryCode: "KE",
+      accountNumber: "0020100014605",
+      fromDate: "2018-01-18",
+      toDate: "2018-04-19",
+      limit: 3,
+    },
+  })
+  .then((r) => console.log(r.data))
+  .catch((r) => console.log(r.response.data));
+sdk
+  .openingClosingAccountBalance({
+    headers: { Authorization: `Bearer ${accessToken}` },
+    data: {
+      countryCode: "KE",
+      accountId: "0011547896523",
+      date: "2017-09-29",
+    },
+  })
+  .then((r) => console.log(r.data))
+  .catch((r) => console.log(r.response.data));
+sdk
+  .accountInquiry({
+    params: { countryCode: "KE", accountNumber: "0020100014605" },
+    headers: { Authorization: `Bearer ${accessToken}` },
+  })
+  .then((r) => console.log(r.data))
+  .catch((r) => console.log(r.response.data));

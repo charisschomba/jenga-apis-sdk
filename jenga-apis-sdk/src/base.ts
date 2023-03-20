@@ -1,4 +1,3 @@
-import fetch from "isomorphic-unfetch";
 import axios from "axios";
 
 export abstract class Base {
@@ -8,6 +7,7 @@ export abstract class Base {
   protected consumerSecret: string;
   protected env?: string = BaseUrl.UAT;
   protected privateKeyPath: string;
+  private enableLogging?: boolean = false;
 
   constructor(config: Config) {
     this.apiKey = config.apiKey;
@@ -15,6 +15,7 @@ export abstract class Base {
     this.consumerSecret = config.consumerSecret;
     this.env = config.env;
     this.privateKeyPath = config.privateKeyPath;
+    this.enableLogging = config.enableLogging;
     if (this.env) {
       this.baseUrl = BaseUrl[config.env];
     }
@@ -34,13 +35,11 @@ export abstract class Base {
       ...options,
       headers,
     };
+    if (this.enableLogging) {
+      console.log(url);
+      // console.log({ url, config });
+    }
     return axios(url, config);
-    // return fetch(url, config).then((response) => {
-    //   if (response.ok) {
-    //     return response.json();
-    //   }
-    //   throw new Error(response.statusText);
-    // });
   }
 }
 type Config = {
@@ -49,6 +48,7 @@ type Config = {
   consumerSecret: string;
   env?: string;
   privateKeyPath: string;
+  enableLogging?: boolean;
 };
 enum BaseUrl {
   DEV = "https://api-finserve-dev.azure-api.net",

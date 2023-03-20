@@ -10,5 +10,5 @@ interface JengaApisSdk extends Account {}
 interface JengaApisSdk extends Airtime {}
 
 applyMixins(JengaApisSdk, [Auth, Airtime, Account]);
-
+// export  const Airtime
 export default JengaApisSdk;
