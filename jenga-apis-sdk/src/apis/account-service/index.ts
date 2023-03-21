@@ -3,7 +3,7 @@ import { generateSignature } from "../../utils/signature";
 
 export class Account extends Base {
   /*This web service enables an application or service retrieve the current and available balance of an account*/
-  accountBalance(options: Options): Promise<any> {
+  accountBalance<T>(options: Options): Promise<T> {
     const { countryCode, accountId } = options.params;
     const signature = generateSignature(
       countryCode + accountId,
@@ -11,6 +11,15 @@ export class Account extends Base {
     );
     delete options.params;
     const config = { ...options, headers: { ...options.headers, signature } };
+    // this.authenticate(() =>
+    //   this.request(
+    //     `/v3-apis/account-api/v3.0/accounts/balances/${countryCode}/${accountId}`,
+    //     {
+    //       method: "GET",
+    //       ...config,
+    //     }
+    //   )
+    // );
     return this.request(
       `/v3-apis/account-api/v3.0/accounts/balances/${countryCode}/${accountId}`,
       {
@@ -29,7 +38,7 @@ export class Account extends Base {
     delete options.params;
     const config = { ...options, headers: { ...options.headers, signature } };
     return this.request(
-      `/v3-apis/account-api/v3.0/accounts/ministatement/${countryCode}/${accountNumber}`,
+      `/v3-apis/account-api/v3.0/accounts/miniStatement/${countryCode}/${accountNumber}`,
       {
         method: "GET",
         ...config,
@@ -44,7 +53,7 @@ export class Account extends Base {
       this.privateKeyPath
     );
     const config = { ...options, headers: { ...options.headers, signature } };
-    return this.request(`/v3-apis/account-api/v3.0/accounts/fullstatement`, {
+    return this.request(`/v3-apis/account-api/v3.0/accounts/fullStatement`, {
       method: "POST",
       ...config,
     });
@@ -58,7 +67,7 @@ export class Account extends Base {
     );
     const config = { ...options, headers: { ...options.headers, signature } };
     return this.request(
-      `/v3-apis/account-api/v3.0/accounts/accountbalance/query`,
+      `/v3-apis/account-api/v3.0/accounts/accountBalance/query`,
       {
         method: "POST",
         ...config,
@@ -75,7 +84,7 @@ export class Account extends Base {
     delete options.params;
     const config = { ...options, headers: { ...options.headers, signature } };
     return this.request(
-      `/v3-apis/account-api/v3.0/search/${countryCode}/${accountNumber}`,
+      `/v3-apis/account-api/v3.0/accounts/search/${countryCode}/${accountNumber}`,
       {
         method: "GET",
         ...config,

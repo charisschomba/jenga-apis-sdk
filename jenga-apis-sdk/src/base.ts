@@ -1,5 +1,7 @@
 import axios from "axios";
-
+import { AuthResponse } from "./apis/auth/types";
+let _this;
+const fetch = axios;
 export abstract class Base {
   private baseUrl = BaseUrl.DEV;
   protected apiKey: string;
@@ -8,6 +10,7 @@ export abstract class Base {
   protected env?: string = BaseUrl.UAT;
   protected privateKeyPath: string;
   private enableLogging?: boolean = false;
+  private token: string = null;
 
   constructor(config: Config) {
     this.apiKey = config.apiKey;
@@ -19,6 +22,7 @@ export abstract class Base {
     if (this.env) {
       this.baseUrl = BaseUrl[config.env];
     }
+    _this = this;
   }
 
   protected request<T>(
@@ -40,6 +44,26 @@ export abstract class Base {
       // console.log({ url, config });
     }
     return axios(url, config);
+  }
+  protected authenticate(cb) {
+    console.log(1234);
+    fetch(`${this.baseUrl}/authentication/api/v3/authenticate/merchant`, {
+      method: "POST",
+      headers: { "Api-Key": this.apiKey },
+      data: {
+        merchantCode: this.merchantCode,
+        consumerSecret: this.consumerSecret,
+      },
+    })
+      .then((res: any) => {
+        this.token = res.data.accessToken;
+        console.log({ token: this.token });
+        // config.headers.Authorization = `Bearer ${this.token}`;
+        cb();
+      })
+      .catch((error) => {
+        return Promise.reject(error);
+      });
   }
 }
 type Config = {

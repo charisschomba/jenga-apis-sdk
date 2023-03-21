@@ -1,7 +1,7 @@
 import JengaApisSdk from "jenga-apis-sdk";
 
 const accessToken =
-  "eyJhbGciOiJSUzUxMiJ9.eyJ0b2tlblR5cGUiOiJNRVJDSEFOVCIsImVudiI6IlVBVCIsImV4cCI6MTY3OTMxNTUyMiwiaWF0IjoxNjc5MzE0NjIyLCJhY2NvdW50IjoiMEM1QUZFMThEOURCRkZEOTU5ODIyNjU2RjY1MUVDMDczN0FGNzE2RDdCQ0Y0MzlDRTg4RDEzMDU4RkQzQjFEQTAxNUM5NTk3Q0I4RDEyQTA1MjE4QTVCQjkwNTRFQUVCcERsRjFiRlY5eWhhbHA2SXByV3dzRjNBd2dCVEkrV1BKYjh3UUxtUmtXd0Z6NHRYblFaTFg1dkYyNDlyZTVCNlV3NnF1TEZmbVhUbHR6QzBKLzlsN3FvS0ZHV1NYRW5RWUluZUVSTHNrMlo1R0VGNVhqQWo5OFhHR0RkeXg1aVVWbHFWTmNvRis4Nld6T2VuNTNqMmlhc01tQ0g3RnU1TVdmZmd3Q1Zub20xaU5yM3UwZnN3NmlBMnkvM3pXamZjMStpMFhIeG1ObmtaSUYzZHNtRnhRcDJQNVoyNE5wdmJkc1A2YXVhczNGdVRUenQ2c3kvSWIrOTlVWmFjME1lMVdtRTdoQkZFY3Z3dGtRWVJpL2ovM3NNVFFYeE93M0x2Ulo1cXRkeko2TG9XNnhvTXZObW15VXlrakx2Zk9oMkluMG1Leld5ZnptZGdyUUREaUpyN2ExVjlTdlB0YmZGM1A4alBqcnZndGJrdHBXaWZFSjZOeWFIZFdiYWZxQkc4b2Y1RUwvRjBVZGFBV201NGEyRUpXZTBTRWN5aHVFTmVoTUFrcWpwa3lCOD0ifQ.m7xyTlTGPD78wISOJKGtpd0kJeO5Z7jP1_HEEgli7600T5hVVsPj4X8QZTIp4Aii2pieCQQTZbYINjfa_GSHCZx6a6kreHv360zjj7my8tQ-le_ChEZKaH7bWFPmK-aYKAbP375x6NG-9Mu8fdGHp5slxrlCSj7W26vbeNEhg1folZoIgOamMJBj46rAkcyLDOh8TashxSiY-AYdyBKOGRPBj-rlnIJVVTbZYK6QaRLJ1t_m35SATIQ__HX5JgGoddgBOMIksQc3hT9cgQuUY6k6xaPY3nCQbC2ez1nt9auE4OZ0cbfIY8AnT2A7a4mt5VZRBeZ-lsb592p6io2VCg";
+  "eyJhbGciOiJSUzUxMiJ9.eyJ0b2tlblR5cGUiOiJNRVJDSEFOVCIsImVudiI6IlVBVCIsImV4cCI6MTY3OTM5NDgwMSwiaWF0IjoxNjc5MzkzOTAxLCJhY2NvdW50IjoiMzRCNjY0NTBEQjY0Q0EwOUE1NEQ0N0EwQkY4QzY1Q0E4NzA3RUU2REI4QzVFNjRCOTdGN0Q1Q0ZEQUNDQzdCQjFGMzhGRjJBNDBEOEZGODlDQkI4QzgxMDAxNjMyNjdDSXpBZlZZVWZPN1pxSS9sVDJoTzVRZkpWN2ZSaEFlYnlvVjFpY3NSYVBtZ1prY1NzUkQ5M3NhaU1RYTBZc0ZVeFFxcjRIRWFXTFJQNzJiNkx4MzFhSGRFUHQrSFd1SFVhd2I5Zll5ZVhmMlFEUDBCNlN6TVNmUm8rSFJMQzZvNWJXNTR1Zkx0WlFFek95NG11Q1BwaXNYa0dPUWwrN2lWNmFZemw1YnR5bjBYdVluTVNnemFGcFlIVW1icjNUKzNGZ1pXQ1ZnbEp2dXB4L0U5MW12KzUySnpQZ0h4L0kvbDF5Z1RCS1VyTzVOdU41b3VLb3YvRW1JaytsUjdNdGxDcFFrZXlZdXN2c0VzVFhnRTJCSktqZk9Cb09wdnk4QW8xMVpBUGFJSk5LTlJZb0xrUThNbTJ2cDBqakYxbTc0Rk9sUFh6N3ZPRVduMys3OStLWnFLU25QamdtVVdiV3VzbUsxU214SzZKTE13cE05UFdMQm4rTFJTSjZqSElIMUcxSnNGOUdmT0ZIOVNweVJvbnllTDNROU9iYjdwTWR1Z1BZRENvakNnVlQ3OD0ifQ.QYqswU6qQsa7ZMkOPpzyfIhtCI2UlGlXvmmd4heG9dXJLXIrNx2LLfcnMywcdyuR4DTai4UopFlDf-_ZG7Wx6veY50PStURbbCjrntDHyGditQXJ0ZGCg7tQvMiB3T_0HWahPmP4DZHH6Y085Lcy-Xiv5kZUlPNiQKTZG932-blZEoAKPc4LMoFVFlrcjfStoIumwg3u7CFnUhOpF6a3Cvu17G7orNY4m-e1ra51jcVcbE-vLXyxqg8iv3JCcurxhxsfPAVmPuwRQfDJEpKkCwxTyLBzhsSEMzGfp_PwTbUavHAaoMvftyRPB_xoyeBtRkelljvHsM8xv5Vzr5hvNw";
 const sdk: JengaApisSdk = new JengaApisSdk({
   apiKey:
     "B/xDKDWPMX5acekuX5QZF/8JIozvr40Xd+2RABniIRfwsO7gs4UuhwPJxthWpi14Y3JfSi+8JlkRO9xuL6DuVg==",
@@ -18,13 +18,13 @@ const sdk: JengaApisSdk = new JengaApisSdk({
 //     console.log("auth");
 //     console.log(r.response.data);
 //   });
-// sdk
-//   .accountBalance({
-//     params: { countryCode: "KE", accountId: "1100194977404" },
-//     headers: { Authorization: `Bearer ${accessToken}` },
-//   })
-//   .then((r) => console.log(r.data))
-//   .catch((r) => console.log(r.response.data));
+sdk
+  .accountBalance({
+    params: { countryCode: "KE", accountId: "1100194977404" },
+    headers: { Authorization: `Bearer ${accessToken}` },
+  })
+  .then((r: any) => console.log(r.data))
+  .catch((r: any) => console.log(r.response.data));
 
 sdk
   .accountMiniStatement({
