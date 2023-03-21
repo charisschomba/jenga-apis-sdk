@@ -1,6 +1,6 @@
 import axios from "axios";
-import { AuthResponse } from "./apis/auth/types";
-let _this;
+import { isTokenExpired } from "./utils/checkTokenValidity";
+
 const fetch = axios;
 export abstract class Base {
   private baseUrl = BaseUrl.DEV;
@@ -10,7 +10,8 @@ export abstract class Base {
   protected env?: string = BaseUrl.UAT;
   protected privateKeyPath: string;
   private enableLogging?: boolean = false;
-  private token: string = null;
+  protected enableAuthorization = false;
+  private token: Token = { accessToken: null, expiresIn: null };
 
   constructor(config: Config) {
     this.apiKey = config.apiKey;
@@ -19,10 +20,13 @@ export abstract class Base {
     this.env = config.env;
     this.privateKeyPath = config.privateKeyPath;
     this.enableLogging = config.enableLogging;
+    this.enableAuthorization = config.enableAuthorization;
+    if (this.enableAuthorization) {
+      this.enableAuthorization = config.enableAuthorization;
+    }
     if (this.env) {
       this.baseUrl = BaseUrl[config.env];
     }
-    _this = this;
   }
 
   protected request<T>(
@@ -32,6 +36,7 @@ export abstract class Base {
     const url = `${this.baseUrl}${endpoint}`;
     const headers = {
       "Content-Type": "application/json",
+
       ...options.headers,
     };
     delete options.headers;
@@ -40,30 +45,43 @@ export abstract class Base {
       headers,
     };
     if (this.enableLogging) {
-      console.log(url);
-      // console.log({ url, config });
+      console.info({ url, headers: config.headers, body: config.data });
     }
     return axios(url, config);
   }
-  protected authenticate(cb) {
-    console.log(1234);
-    fetch(`${this.baseUrl}/authentication/api/v3/authenticate/merchant`, {
-      method: "POST",
-      headers: { "Api-Key": this.apiKey },
-      data: {
-        merchantCode: this.merchantCode,
-        consumerSecret: this.consumerSecret,
-      },
-    })
-      .then((res: any) => {
-        this.token = res.data.accessToken;
-        console.log({ token: this.token });
-        // config.headers.Authorization = `Bearer ${this.token}`;
-        cb();
-      })
-      .catch((error) => {
-        return Promise.reject(error);
+  protected withAuth<T>(config, url): Promise<T> {
+    if (this.token.expiresIn && !isTokenExpired(this.token.expiresIn)) {
+      console.info("Setting Required Headers");
+      return this.request(url, {
+        ...config,
+        headers: {
+          ...config.headers,
+          Authorization: `Bearer ${this.token.accessToken}`,
+        },
       });
+    }
+    console.info("Refreshing Access Token");
+    return fetch(
+      `${this.baseUrl}/authentication/api/v3/authenticate/merchant`,
+      {
+        method: "POST",
+        headers: { "Api-Key": this.apiKey },
+        data: {
+          merchantCode: this.merchantCode,
+          consumerSecret: this.consumerSecret,
+        },
+      }
+    ).then((res: any) => {
+      this.token = res.data;
+      return this.request(url, {
+        method: "GET",
+        ...config,
+        headers: {
+          ...config.headers,
+          Authorization: `Bearer ${res.data.accessToken}`,
+        },
+      });
+    });
   }
 }
 type Config = {
@@ -73,6 +91,7 @@ type Config = {
   env?: string;
   privateKeyPath: string;
   enableLogging?: boolean;
+  enableAuthorization?: boolean;
 };
 enum BaseUrl {
   DEV = "https://api-finserve-dev.azure-api.net",
@@ -83,4 +102,11 @@ type Options = {
   headers?: any;
   data?: any;
   params?: any;
+};
+type Token = {
+  accessToken: string | null;
+  expiresIn: string | null;
+  refreshToken?: string;
+  tokenType?: string;
+  issuedAt?: string;
 };

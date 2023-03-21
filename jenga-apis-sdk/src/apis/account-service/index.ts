@@ -3,30 +3,34 @@ import { generateSignature } from "../../utils/signature";
 
 export class Account extends Base {
   /*This web service enables an application or service retrieve the current and available balance of an account*/
-  accountBalance<T>(options: Options): Promise<T> {
+  accountBalance<T>(options: Options): any {
     const { countryCode, accountId } = options.params;
     const signature = generateSignature(
       countryCode + accountId,
       this.privateKeyPath
     );
     delete options.params;
-    const config = { ...options, headers: { ...options.headers, signature } };
-    // this.authenticate(() =>
-    //   this.request(
-    //     `/v3-apis/account-api/v3.0/accounts/balances/${countryCode}/${accountId}`,
-    //     {
-    //       method: "GET",
-    //       ...config,
-    //     }
-    //   )
-    // );
-    return this.request(
-      `/v3-apis/account-api/v3.0/accounts/balances/${countryCode}/${accountId}`,
-      {
-        method: "GET",
-        ...config,
-      }
-    );
+    const config = {
+      ...options,
+      headers: {
+        ...options.headers,
+        signature,
+      },
+    };
+    const url = `/v3-apis/account-api/v3.0/accounts/balances/${countryCode}/${accountId}`;
+    this.enableAuthorization
+      ? this.withAuth(config, url)
+      : this.request(url, {
+          method: "GET",
+          ...config,
+        });
+    if (this.enableAuthorization) {
+      return this.withAuth(config, url);
+    }
+    return this.request(url, {
+      method: "GET",
+      ...config,
+    });
   }
   /*This service will return the last (10) ten transactions of a given account number.*/
   accountMiniStatement(options: Options): Promise<any> {
@@ -36,14 +40,16 @@ export class Account extends Base {
       this.privateKeyPath
     );
     delete options.params;
-    const config = { ...options, headers: { ...options.headers, signature } };
-    return this.request(
-      `/v3-apis/account-api/v3.0/accounts/miniStatement/${countryCode}/${accountNumber}`,
-      {
-        method: "GET",
-        ...config,
-      }
-    );
+    const config = {
+      ...options,
+      headers: { ...options.headers, signature },
+      method: "GET",
+    };
+    const url = `/v3-apis/account-api/v3.0/accounts/miniStatement/${countryCode}/${accountNumber}`;
+    if (this.enableAuthorization) {
+      return this.withAuth(config, url);
+    }
+    return this.request(url, config);
   }
   /*his web service enables the Jengi to retrieve the full set of transactions on a particular account based on a specified date range.*/
   accountFullStatement(options: Options): Promise<any> {
@@ -52,11 +58,16 @@ export class Account extends Base {
       accountNumber + countryCode + toDate,
       this.privateKeyPath
     );
-    const config = { ...options, headers: { ...options.headers, signature } };
-    return this.request(`/v3-apis/account-api/v3.0/accounts/fullStatement`, {
+    const config = {
+      ...options,
+      headers: { ...options.headers, signature },
       method: "POST",
-      ...config,
-    });
+    };
+    const url = `/v3-apis/account-api/v3.0/accounts/fullStatement`;
+    if (this.enableAuthorization) {
+      return this.withAuth(config, url);
+    }
+    return this.request(url, config);
   }
   /*This web service enables an application or service retrieve the opening and closing balance of an account for a given date*/
   openingClosingAccountBalance(options: Options): Promise<any> {
@@ -65,14 +76,16 @@ export class Account extends Base {
       accountId + countryCode + date,
       this.privateKeyPath
     );
-    const config = { ...options, headers: { ...options.headers, signature } };
-    return this.request(
-      `/v3-apis/account-api/v3.0/accounts/accountBalance/query`,
-      {
-        method: "POST",
-        ...config,
-      }
-    );
+    const config = {
+      ...options,
+      headers: { ...options.headers, signature },
+      method: "POST",
+    };
+    const url = `/v3-apis/account-api/v3.0/accounts/accountBalance/query`;
+    if (this.enableAuthorization) {
+      return this.withAuth(config, url);
+    }
+    return this.request(url, config);
   }
   /*Get account details*/
   accountInquiry(options: Options): Promise<any> {
@@ -82,14 +95,16 @@ export class Account extends Base {
       this.privateKeyPath
     );
     delete options.params;
-    const config = { ...options, headers: { ...options.headers, signature } };
-    return this.request(
-      `/v3-apis/account-api/v3.0/accounts/search/${countryCode}/${accountNumber}`,
-      {
-        method: "GET",
-        ...config,
-      }
-    );
+    const config = {
+      ...options,
+      headers: { ...options.headers, signature },
+      method: "GET",
+    };
+    const url = `/v3-apis/account-api/v3.0/accounts/search/${countryCode}/${accountNumber}`;
+    if (this.enableAuthorization) {
+      return this.withAuth(config, url);
+    }
+    return this.request(url, config);
   }
 }
 type Options = {
