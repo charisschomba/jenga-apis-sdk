@@ -2,7 +2,7 @@ import { Base } from "../../base";
 import { generateSignature } from "../../utils/signature";
 
 export class AccountService extends Base {
-  /*This web service enables an application or service retrieve the current and available balance of an account*/
+  /**This web service enables an application or service retrieve the current and available balance of an account*/
   accountBalance<T>(options: Options): any {
     const { countryCode, accountId } = options.params;
     const signature = generateSignature(
@@ -32,7 +32,7 @@ export class AccountService extends Base {
       ...config,
     });
   }
-  /*This service will return the last (10) ten transactions of a given account number.*/
+  /**This service will return the last (10) ten transactions of a given account number.*/
   accountMiniStatement(options: Options): Promise<any> {
     const { countryCode, accountNumber } = options.params;
     const signature = generateSignature(
@@ -51,7 +51,7 @@ export class AccountService extends Base {
     }
     return this.request(url, config);
   }
-  /*his web service enables the Jengi to retrieve the full set of transactions on a particular account based on a specified date range.*/
+  /**This web service enables the Jengi to retrieve the full set of transactions on a particular account based on a specified date range.*/
   accountFullStatement(options: Options): Promise<any> {
     const { countryCode, accountNumber, toDate } = options.data;
     const signature = generateSignature(

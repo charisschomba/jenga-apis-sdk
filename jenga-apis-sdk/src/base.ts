@@ -10,7 +10,7 @@ export abstract class Base {
   protected env?: string = BaseUrl.UAT;
   protected privateKeyPath: string;
   private enableLogging?: boolean = false;
-  protected enableAuthorization = true;
+  protected enableAuthorization?: boolean = true;
   private token: Token = { accessToken: null, expiresIn: null };
 
   constructor(config: Config) {
@@ -45,7 +45,11 @@ export abstract class Base {
       headers,
     };
     if (this.enableLogging) {
-      console.info({ url, headers: config.headers, body: config.data });
+      console.info({
+        url,
+        body: config.data || {},
+        params: config.params || {},
+      });
     }
     return axios(url, config);
   }
