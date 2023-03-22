@@ -8,7 +8,7 @@
     "sourceMap": false,
     "outDir": "./dist",
     "baseUrl": "./",
-    "incremental": true
+    "incremental": true,
   },
   "include": ["src/**/*"],
   "exclude": ["node_modules", "test",  "lib", "**/*spec.ts"]

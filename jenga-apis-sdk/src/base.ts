@@ -10,7 +10,7 @@ export abstract class Base {
   protected env?: string = BaseUrl.UAT;
   protected privateKeyPath: string;
   private enableLogging?: boolean = false;
-  protected enableAuthorization = false;
+  protected enableAuthorization = true;
   private token: Token = { accessToken: null, expiresIn: null };
 
   constructor(config: Config) {

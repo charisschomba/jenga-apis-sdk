@@ -1,7 +1,7 @@
 import { Base } from "../../base";
 import { generateSignature } from "../../utils/signature";
 
-export class Account extends Base {
+export class AccountService extends Base {
   /*This web service enables an application or service retrieve the current and available balance of an account*/
   accountBalance<T>(options: Options): any {
     const { countryCode, accountId } = options.params;

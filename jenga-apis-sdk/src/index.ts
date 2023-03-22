@@ -1,14 +1,11 @@
 import { Base } from "./base";
 import { applyMixins } from "./utils/applyMixing";
-import { Auth } from "./apis/auth";
-import { Account } from "./apis/account-service";
-import { Airtime } from "./apis/airtime";
+import { AuthService } from "./apis/auth";
+import { AccountService } from "./apis/account-service";
 
-class JengaApisSdk extends Base {}
-interface JengaApisSdk extends Auth {}
-interface JengaApisSdk extends Account {}
-interface JengaApisSdk extends Airtime {}
+class JengaApiSdk extends Base {}
+interface JengaApiSdk extends AuthService {}
+interface JengaApiSdk extends AccountService {}
 
-applyMixins(JengaApisSdk, [Auth, Airtime, Account]);
-// export  const Airtime
-export default JengaApisSdk;
+applyMixins(JengaApiSdk, [AuthService, AccountService]);
+export { AuthService, AccountService, JengaApiSdk };

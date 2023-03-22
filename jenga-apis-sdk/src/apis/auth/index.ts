@@ -1,7 +1,7 @@
 import { Base } from "../../base";
 import { AuthResponse } from "./types";
 
-export class Auth extends Base {
+export class AuthService extends Base {
   generateToken(): Promise<AuthResponse> {
     return this.request("/authentication/api/v3/authenticate/merchant", {
       method: "POST",
