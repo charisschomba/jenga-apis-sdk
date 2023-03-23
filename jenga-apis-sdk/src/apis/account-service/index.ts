@@ -2,7 +2,15 @@ import { Base } from "../../base";
 import { generateSignature } from "../../utils/signature";
 
 export class AccountService extends Base {
-  /**This web service enables an application or service retrieve the current and available balance of an account*/
+  /**
+   * Account Balance
+   *
+   * https://developer.jengaapi.io/reference/get-account-balance
+   *
+   * This web service enables an application or service retrieve the current and available balance of an account\
+   *
+   * @param options
+   * */
   accountBalance<T>(options: Options): any {
     const { countryCode, accountId } = options.params;
     const signature = generateSignature(
@@ -32,7 +40,16 @@ export class AccountService extends Base {
       ...config,
     });
   }
-  /**This service will return the last (10) ten transactions of a given account number.*/
+  /**
+   * Account MINI Statement
+   *
+   * https://developer.jengaapi.io/reference/get-account-statement-mini
+   *
+   * This service will return the last (10) ten transactions of a given account number.
+   *
+   * @param options
+   *
+   * */
   accountMiniStatement(options: Options): Promise<any> {
     const { countryCode, accountNumber } = options.params;
     const signature = generateSignature(
@@ -51,7 +68,16 @@ export class AccountService extends Base {
     }
     return this.request(url, config);
   }
-  /**This web service enables the Jengi to retrieve the full set of transactions on a particular account based on a specified date range.*/
+  /**
+   * Account Full Statement
+   *
+   * https://developer.jengaapi.io/reference/get-account-statement-full
+   *
+   * This web service enables the Jengi to retrieve the full set of transactions on a particular account based on a specified date range.
+   *
+   * @param options
+   *
+   * */
   accountFullStatement(options: Options): Promise<any> {
     const { countryCode, accountNumber, toDate } = options.data;
     const signature = generateSignature(
@@ -69,7 +95,15 @@ export class AccountService extends Base {
     }
     return this.request(url, config);
   }
-  /*This web service enables an application or service retrieve the opening and closing balance of an account for a given date*/
+  /**
+   * Opening and Closing Account Balance
+   *
+   * https://developer.jengaapi.io/reference/opening-and-closing-balance
+   *
+   * This web service enables an application or service retrieve the opening and closing balance of an account for a given date
+   *
+   * @param options
+   * */
   openingClosingAccountBalance(options: Options): Promise<any> {
     const { countryCode, accountId, date } = options.data;
     const signature = generateSignature(
@@ -87,7 +121,15 @@ export class AccountService extends Base {
     }
     return this.request(url, config);
   }
-  /*Get account details*/
+  /**
+   * Account Inquiry - Bank Accounts
+   *
+   * https://developer.jengaapi.io/reference/account-inquiry
+   *
+   * Get account details
+   *
+   * @param options
+   */
   accountInquiry(options: Options): Promise<any> {
     const { countryCode, accountNumber } = options.params;
     const signature = generateSignature(

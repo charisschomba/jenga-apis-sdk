@@ -2,7 +2,15 @@ import { Base } from "../../base";
 import { generateSignature } from "../../utils/signature";
 
 export class AirtimeService extends Base {
-  /**This gives an application the ability to purchase airtime from any telco in East and Central Africa.*/
+  /**
+   * Purchase Airtime
+   *
+   * https://developer.jengaapi.io/reference/purchase-airtime
+   *
+   * This gives an application the ability to purchase airtime from any telco in East and Central Africa.
+   *
+   * @param options
+   */
   airtimePurchase(options: Options): Promise<any> {
     const { telco, amount, reference } = options.data.airtime;
     const signature = generateSignature(

@@ -1,8 +1,15 @@
 import { Base } from "../../base";
-import { generateSignature } from "../../utils/signature";
 
 export class ForexService extends Base {
-  /**The Foreign Exchange Rates API Provides Easy Access To The Equity Bank Daily Currency Conversion Rate For Major Currencies*/
+  /**
+   * Get Forex Rates
+   *
+   * https://developer.jengaapi.io/reference/get-forex-rates
+   *
+   * The Foreign Exchange Rates API Provides Easy Access To The Equity Bank Daily Currency Conversion Rate For Major Currencies
+   *
+   * @param options
+   */
   getForexRates(options: Options): Promise<any> {
     const config = {
       ...options,

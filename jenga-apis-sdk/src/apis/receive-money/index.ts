@@ -2,10 +2,14 @@ import { Base } from "../../base";
 import { generateSignature } from "../../utils/signature";
 
 export class ReceiveMoneyService extends Base {
-  /*
-   * https://developer.jengaapi.io/reference/bill-payment
+  /**
    * Receive Payments - Bill Payments
+   *
+   * https://developer.jengaapi.io/reference/bill-payment
+   *
    * This API Provides Partners the Capability To Initiate Utility Bill Payments For Goods And Services
+   *
+   * @param options
    */
   receivePaymentsBillPayments(options: {
     headers?: any;
@@ -27,13 +31,17 @@ export class ReceiveMoneyService extends Base {
     }
     return this.request(url, config);
   }
-  /*
-   * https://developer.jengaapi.io/reference/merchant-payment
+  /**
    * Receive Payments - Merchant Payments
+   *
+   * https://developer.jengaapi.io/reference/merchant-payment
+   *
    * This API Provides Partners the Capability To Make Payments For Goods And Services
+   *
+   * @param options
    */
   receivePaymentsBMerchantPayments(options: {
-    headers: any;
+    headers?: any;
     data: MerchantPayment;
   }): Promise<any> {
     const { merchant, partner, payment } = options.data;
@@ -56,16 +64,19 @@ export class ReceiveMoneyService extends Base {
     }
     return this.request(url, config);
   }
-  /*
-   * https://developer.jengaapi.io/reference/bill-validation-1
+  /**
    * Bill Validation
+   * https://developer.jengaapi.io/reference/bill-validation-1
+   *
    * This web service enables your application perform a bill validation.
    * This is typically before a payment is made for example before paying a
    * utility bill you would like the payment application to validate it
    * actually exists and its details are correct
+   *
+   * @param options
    * */
   billValidations(options: {
-    headers: any;
+    headers?: any;
     data: BillValidation;
   }): Promise<any> {
     const config = {

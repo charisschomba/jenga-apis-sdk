@@ -7,6 +7,9 @@ import { ForexService } from "./apis/forex";
 import { KycService } from "./apis/kyc";
 import { ReceiveMoneyQueryService } from "./apis/receive-money-query";
 import { ReceiveMoneyService } from "./apis/receive-money";
+import { SendMoneyService } from "./apis/send-money";
+import { SendMoneyImtService } from "./apis/send-money-imt";
+import { MpgsDirectIntegrationService } from "./apis/mpgs-direct-integration";
 
 class JengaApiSdk extends Base {}
 interface JengaApiSdk extends AuthService {}
@@ -16,16 +19,21 @@ interface JengaApiSdk extends ForexService {}
 interface JengaApiSdk extends KycService {}
 interface JengaApiSdk extends ReceiveMoneyQueryService {}
 interface JengaApiSdk extends ReceiveMoneyService {}
+interface JengaApiSdk extends SendMoneyService {}
+interface JengaApiSdk extends SendMoneyImtService {}
+interface JengaApiSdk extends MpgsDirectIntegrationService {}
 
 applyMixins(JengaApiSdk, [
   AuthService,
-  AccountService,
   AccountService,
   AirtimeService,
   ForexService,
   KycService,
   ReceiveMoneyQueryService,
   ReceiveMoneyService,
+  SendMoneyService,
+  SendMoneyImtService,
+  MpgsDirectIntegrationService,
 ]);
 export {
   AuthService,
@@ -35,5 +43,8 @@ export {
   KycService,
   ReceiveMoneyQueryService,
   ReceiveMoneyService,
+  SendMoneyService,
+  SendMoneyImtService,
+  MpgsDirectIntegrationService,
   JengaApiSdk,
 };

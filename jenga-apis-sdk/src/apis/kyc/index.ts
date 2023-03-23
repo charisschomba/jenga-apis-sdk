@@ -3,7 +3,12 @@ import { generateSignature } from "../../utils/signature";
 
 export class KycService extends Base {
   /**
-   This web service enables your application to query the various registrar of persons in the various countries in East Africa. Currently available for Kenya and Rwanda only.
+   * ID Search & Verification
+   *
+   * https://developer.jengaapi.io/reference/identity-verification
+   *
+   * This web service enables your application to query the various registrar of persons in the various countries in East Africa. Currently available for Kenya and Rwanda only.
+   * @param options
    */
   validateIdentity(options: Options): Promise<any> {
     const { countryCode, documentNumber } = options.data.identity;

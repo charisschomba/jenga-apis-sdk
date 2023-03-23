@@ -2,7 +2,13 @@ import { Base } from "../../base";
 
 export class ReceiveMoneyQueryService extends Base {
   /**
-   * This webservice returns all EazzyPay merchants .
+   * Get All EazzyPay Merchants
+   *
+   * https://developer.jengaapi.io/reference/merchant-lookup
+   *
+   * This webservice returns all EazzyPay merchants.
+   *
+   * @param options
    */
   getAllEazzyPayMerchants(options: Options): Promise<any> {
     const config = {
@@ -16,9 +22,15 @@ export class ReceiveMoneyQueryService extends Base {
     }
     return this.request(url, config);
   }
-  /*
+  /**
+   * Query Transaction Details
+   *
+   * https://developer.jengaapi.io/reference/query-payment-details
+   *
    * This webservice enables an application or service to query a transactions details and status
-   * */
+   *
+   * @param options
+   **/
   queryTransactionDetails(options: {
     headers?: any;
     params: { ref: string };
@@ -36,8 +48,14 @@ export class ReceiveMoneyQueryService extends Base {
     }
     return this.request(url, config);
   }
-  /*
-   * This web service returns a paginated list of all billers
+  /**
+   * Get All Billers
+   *
+   * https://developer.jengaapi.io/reference/biller-lookup
+   *
+   * This web service returns a paginated list of all billers.
+   *
+   * @param options
    */
   getAllBillers(options: Options): Promise<any> {
     const config = {
