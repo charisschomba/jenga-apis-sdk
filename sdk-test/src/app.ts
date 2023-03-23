@@ -230,7 +230,6 @@ app.get("/getAllBillers", (req, res) => {
       res.send(r.response.data);
     });
 });
-
 app.listen(port, () => {
   console.log(`Jenga SDK Test App listening on port: ${port}`);
 });
