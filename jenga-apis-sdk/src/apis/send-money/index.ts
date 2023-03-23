@@ -1,7 +1,7 @@
 import { Base } from "src/base";
 import { generateSignature } from "src/utils/signature";
 
-export class SendMoney extends Base {
+export class SendMoneyService extends Base {
     /*
      * https://developer.jengaapi.io/reference/within-equity-bank
      * 
