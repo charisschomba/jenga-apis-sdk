@@ -13,4 +13,37 @@ export class AuthService extends Base {
       },
     });
   }
+
+  updateConfig(config: Config, callback: Function = null) {
+    super.updateConfigs(config, callback);
+    return {
+      apiKey: this.apiKey,
+      merchantCode: this.merchantCode,
+      consumerSecret: this.consumerSecret,
+      env: this.env,
+      privateKeyPath: this.privateKeyPath,
+      enableLogging: this.enableLogging,
+      enableAuthorization: this.enableAuthorization,
+    };
+  }
+  getConfig() {
+    return {
+      apiKey: this.apiKey,
+      merchantCode: this.merchantCode,
+      consumerSecret: this.consumerSecret,
+      env: this.env,
+      privateKeyPath: this.privateKeyPath,
+      enableLogging: this.enableLogging,
+      enableAuthorization: this.enableAuthorization,
+    };
+  }
 }
+type Config = {
+  apiKey?: string;
+  merchantCode?: string;
+  consumerSecret?: string;
+  env?: string;
+  privateKeyPath?: string;
+  enableLogging?: boolean;
+  enableAuthorization?: boolean;
+};

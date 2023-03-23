@@ -1,5 +1,6 @@
 import axios from "axios";
 import { isTokenExpired } from "./utils/checkTokenValidity";
+import { updateSdkInstance } from "./utils/updateConfigs";
 
 const fetch = axios;
 export abstract class Base {
@@ -9,7 +10,7 @@ export abstract class Base {
   protected consumerSecret: string;
   protected env?: string = BaseUrl.UAT;
   protected privateKeyPath: string;
-  private enableLogging?: boolean = false;
+  protected enableLogging?: boolean = false;
   protected enableAuthorization?: boolean = true;
   private token: Token = { accessToken: null, expiresIn: null };
 
@@ -91,6 +92,21 @@ export abstract class Base {
         },
       });
     });
+  }
+
+  protected updateConfigs<T>(
+    config: {
+      apiKey?: string;
+      merchantCode?: string;
+      consumerSecret?: string;
+      env?: string;
+      privateKeyPath?: string;
+      enableLogging?: boolean;
+      enableAuthorization?: boolean;
+    },
+    callback?: Function | null
+  ): Promise<T> | void {
+    updateSdkInstance(this, config, callback);
   }
 }
 type Config = {
