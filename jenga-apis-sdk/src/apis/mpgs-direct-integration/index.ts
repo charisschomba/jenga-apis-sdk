@@ -18,10 +18,10 @@ export class MpgsDirectIntegrationService extends Base {
 
      * @param options
      */
-  mpgsValidatePayment(options: {
+  mpgsValidatePayment<T>(options: {
     headers?: any;
     data: mpgsValidatePaymentData;
-  }): Promise<any> {
+  }): Promise<T> {
     const config = {
       ...options,
       headers: { ...options.headers },
@@ -42,10 +42,10 @@ export class MpgsDirectIntegrationService extends Base {
    *
    * @param options
    */
-  mpgsAuthenticatePayment(options: {
+  mpgsAuthenticatePayment<T>(options: {
     headers?: any;
     data: mpgsAuthenticatePaymentData;
-  }): Promise<any> {
+  }): Promise<T> {
     const config = {
       ...options,
       headers: { ...options.headers },
@@ -66,10 +66,10 @@ export class MpgsDirectIntegrationService extends Base {
    *
    * @param options
    */
-  mpgsAuthorizePayment(options: {
+  mpgsAuthorizePayment<T>(options: {
     headers?: any;
     data: mpgsAuthorizePaymentData;
-  }): Promise<any> {
+  }): Promise<T> {
     const config = {
       ...options,
       headers: { ...options.headers },
@@ -90,10 +90,10 @@ export class MpgsDirectIntegrationService extends Base {
    *
    * @param options
    */
-  mpgsQueryPayment(options: {
+  mpgsQueryPayment<T>(options: {
     headers?: any;
     data: mpgsQueryPaymentData;
-  }): Promise<any> {
+  }): Promise<T> {
     const config = {
       ...options,
       headers: { ...options.headers },
@@ -115,10 +115,10 @@ export class MpgsDirectIntegrationService extends Base {
    * @param options
    *
    */
-  mpgsRefundPayment(options: {
+  mpgsRefundPayment<T>(options: {
     headers?: any;
     data: mpgsRefundPaymentData;
-  }): Promise<any> {
+  }): Promise<T> {
     const config = {
       ...options,
       headers: { ...options.headers },

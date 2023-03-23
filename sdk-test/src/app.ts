@@ -7,10 +7,9 @@ const config = {
   privateKeyPath: "/home/chariss/dev/personal/javascript/JengaSdk/uat.pem",
   env: "UAT",
   enableLogging: true,
+  enableAuthorization: true,
 };
-
-const accessToken =
-  "eyJhbGciOiJSUzUxMiJ9.eyJ0b2tlblR5cGUiOiJNRVJDSEFOVCIsImVudiI6IlVBVCIsImV4cCI6MTY3OTQ3Nzg2NCwiaWF0IjoxNjc5NDc2OTY0LCJhY2NvdW50IjoiMjc3ODIwQUU4RkM2OTc0Q0MwNEM0NTFFMjFCMkJGQzVDNTc0NzFEMDYzRUI2OTI2MDg2NDA5QkY5MzRGQjcyOEE0QUZCQkM1ODdGODYxRDcwMzUyMENGREVEQTE5RjJGUDRHbWlOdmNlakJock9GcTl0ZHg3TkhhbUxpbzJjS0VoUkI5aHpScHNxL0MyelN3VUlEa3haUkJ4VVlNTm9uQzBVU3VWVmZCaFlLWkh0Y1FYYysyc3R4b250MjhhZ1BnNzBveDU1ZFZPaSsranoxemxvcDZYbzNuY3BIczFQL2pDRENFVG01WUs4V01iUXpWL01hbjg1YWNOcjhhZVFUcHJibWd1eEo4STlzVUlPMjF1YS9FazRnd0JEY1MzSjFsRXFxZEI4TlFqWExYZG5JU1VhOUNOT0JMN3VRN0ZweDV4bWI0UVJ0TUVLVTAycHpNV01nV0FLN0E3dXI2U3lLRkV1Y3RLNWQxTmN3aWRKQkJUaTVTTWhhUEY4OUIxZThiTkpqRFNjZGtESG11ZWpKMUJza2hNTkkxY1RZaTFPMFM1U3I4ZUpTclFidmVmekxRd3NxSXhVbEM2Y1VuWE9paVdCanIwN01Ocm9peWtFSDBQZmw3aUpuR09IWlh1M0JWSEkxWHRpWW50bDRHOGw4clVVUEwvSUl0QU9rRmNIa0JWNVZGeVo2Z2J0Zz0ifQ.LtQ9qlbVCSis5jsYPhb9TRVhHKaaS-mINTbyXdwUoNjnU1XUo8XdhWqKaGMsrqDn3czJzVNVSUQXuJf6e5afIESW_O-AnxrrzndceSIlVpqtL7pqsD9nBpUk8uNvn2p9oU6ZT2hd0fZYOGqc3tnkMacqg24mhzAs3-zPar6aQW5BvFhOseVFBb9CdykCZZMTkeJJNfVQ5eA8gI8a6f4bUfThgBVgsGo9yc84fTSbaM68SV6H-4niZQCtMhCy4yuFWgfHl5ccyohpWtI01SBFoUpJFJS7VZWPR6VwLrJVpIXUEdZS7syXfVyyC8l0BF6BAeNxlLRtEK-3DQGha6vLtA";
+const accessToken = "";
 const sdk: JengaApiSdk = new JengaApiSdk(config);
 const express = require("express");
 const app = express();
@@ -27,7 +26,6 @@ app.get("/balance", (req, res) => {
       res.send(r.response.data);
     });
 });
-
 app.get("/token", (req, res) => {
   sdk
     .generateToken()
@@ -41,7 +39,7 @@ app.get("/enquiry", (req, res) => {
       headers: { Authorization: `Bearer ${accessToken}` },
     })
     .then((r: any) => res.send(r.data))
-    .catch((r: any) => r.send(r.response.data));
+    .catch((r: any) => res.send(r.response.data));
 });
 app.post("/openingBalance", (req, res) => {
   sdk
@@ -53,8 +51,8 @@ app.post("/openingBalance", (req, res) => {
         date: "2017-09-29",
       },
     })
-    .then((r: any) => r.send(r.data))
-    .catch((r: any) => r.send(r.response.data));
+    .then((r: any) => res.send(r.data))
+    .catch((r: any) => res.send(r.response.data));
 });
 app.get("/ministatement", (req, res) => {
   sdk
@@ -229,6 +227,477 @@ app.get("/getAllBillers", (req, res) => {
     .catch((r: any) => {
       res.send(r.response.data);
     });
+});
+app.post("/imtSendMoneyWithinEquity", (req, res) => {
+  sdk
+    .imtSendMoneyWithinEquity({
+      data: {
+        source: {
+          countryCode: "KE",
+          name: "Merchant name",
+          accountNumber: "0011547896523",
+        },
+        sender: {
+          name: "Sender Name",
+          documentType: "NationalId",
+          documentNumber: "12345",
+          countryCode: "KE",
+          mobileNumber: "0763000000",
+          email: "sender.name@example.com",
+          address: "Sender Address",
+        },
+        destination: {
+          type: "bank",
+          countryCode: "KE",
+          name: "A N.Other",
+          bankCode: "03",
+          accountNumber: "101080530003",
+          mobileNumber: "0763123456",
+          documentType: "NationalId",
+          documentNumber: "123456",
+        },
+        transfer: {
+          type: "InternalFundsTransfer",
+          amount: "1000",
+          reference: "123456789123",
+          currencyCode: "KES",
+          date: "2018-08-18",
+          description: "some remarks here",
+        },
+      },
+    })
+    .then((r: any) => res.send(r.data))
+    .catch((r: any) => res.send(r.response.data));
+});
+app.post("/imtSendMoneyToMobileWallet", (req, res) => {
+  sdk
+    .imtSendMoneyToMobileWallet({
+      headers: { Authorization: `Bearer ${accessToken}` },
+      data: {
+        source: {
+          countryCode: "KE",
+          name: "John Doe",
+          accountNumber: "0011547896523",
+        },
+        sender: {
+          name: "Sender Name",
+          documentType: "NationalId",
+          documentNumber: "12345",
+          countryCode: "KE",
+          mobileNumber: "0763000000",
+          email: "sender.name@example.com",
+        },
+        destination: {
+          type: "mobile",
+          countryCode: "KE",
+          name: "A N.Other",
+          mobileNumber: "0763123456",
+          walletName: "Mpesa",
+          documentType: "NationalId",
+          documentNumber: "123456",
+        },
+        transfer: {
+          type: "MobileWallet",
+          amount: "1000",
+          currencyCode: "KES",
+          reference: "123456789123",
+          date: "2018-08-18",
+          description: "some remarks here",
+          callbackUrl:
+            "https://webhook.site/561cb941-bf59-414d-880f-aa7ff169382a%22",
+        },
+      },
+    })
+    .then((r: any) => res.send(r.data))
+    .catch((r: any) => res.send(r.response.data));
+});
+app.post("/imtSendMoneyPesalinkToBankAccount", (req, res) => {
+  sdk
+    .imtSendMoneyPesalinkToBankAccount({
+      headers: { Authorization: `Bearer ${accessToken}` },
+      data: {
+        source: {
+          countryCode: "KE",
+          name: "John Doe",
+          accountNumber: "0011547896523",
+        },
+        sender: {
+          name: "Sender Name",
+          documentType: "NationalId",
+          documentNumber: "12345",
+          countryCode: "KE",
+          mobileNumber: "0763000000",
+          email: "sender.name@example.com",
+        },
+        destination: {
+          type: "bank",
+          countryCode: "KE",
+          name: "A N.Other",
+          bankCode: "03",
+          accountNumber: "101080530003",
+          mobileNumber: "0763123456",
+          documentType: "NationalId",
+          documentNumber: "123456",
+        },
+        transfer: {
+          type: "Pesalink",
+          amount: "1000",
+          reference: "123456789123",
+          currencyCode: "KES",
+          date: "2018-08-18",
+          description: "some remarks here",
+        },
+      },
+    })
+    .then((r: any) => res.send(r.data))
+    .catch((r: any) => res.send(r.response.data));
+});
+app.post("/imtSendMoneyPesalinkToMobile", (req, res) => {
+  sdk
+    .imtSendMoneyPesalinkToMobile({
+      headers: { Authorization: `Bearer ${accessToken}` },
+      data: {
+        source: {
+          countryCode: "KE",
+          name: "John Doe",
+          accountNumber: "0011547896523",
+        },
+        sender: {
+          name: "Sender Name",
+          documentType: "NationalId",
+          documentNumber: "12345",
+          countryCode: "KE",
+          mobileNumber: "0763000000",
+          email: "sender.name@example.com",
+        },
+        destination: {
+          type: "mobile",
+          countryCode: "KE",
+          name: "A N.Other",
+          bankCode: "03",
+          accountNumber: "101080530003",
+          mobileNumber: "0763123456",
+          documentType: "NationalId",
+          documentNumber: "123456",
+        },
+        transfer: {
+          type: "Pesalink",
+          amount: "1000",
+          reference: "123456789123",
+          currencyCode: "KES",
+          date: "2022-12-15",
+          description: "some remarks here",
+        },
+      },
+    })
+    .then((r: any) => res.send(r.data))
+    .catch((r: any) => res.send(r.response.data));
+});
+app.post("/sendMoneyWithinEquity", (req, res) => {
+  sdk
+    .sendMoneyWithinEquity({
+      headers: { Authorization: `Bearer ${accessToken}` },
+      data: {
+        source: {
+          countryCode: "KE",
+          name: "A N.Other",
+          accountNumber: "0011547896523",
+        },
+        destination: {
+          type: "bank",
+          countryCode: "KE",
+          name: "John Doe",
+          accountNumber: "0022547896523",
+        },
+        transfer: {
+          type: "InternalFundsTransfer",
+          amount: "1000.00",
+          currencyCode: "KES",
+          reference: "692194625798",
+          date: "2018-08-18",
+          description: "some remarks here",
+        },
+      },
+    })
+    .then((r: any) => res.send(r.data))
+    .catch((r: any) => res.send(r.response.data));
+});
+app.post("/sendMoneyRtgs", (req, res) => {
+  sdk
+    .sendMoneyRtgs({
+      headers: { Authorization: `Bearer ${accessToken}` },
+      data: {
+        source: {
+          countryCode: "KES",
+          name: "John Doe",
+          accountNumber: "0011547896523",
+        },
+        destination: {
+          type: "bank",
+          countryCode: "KE",
+          name: "A N.Other",
+          bankCode: "01",
+          accountNumber: "2564785123",
+        },
+        transfer: {
+          type: "RTGS",
+          amount: "1000.00",
+          currencyCode: "KES",
+          reference: "692194625798",
+          date: "2018-08-16",
+          description: "some remarks here",
+        },
+      },
+    })
+    .then((r: any) => res.send(r.data))
+    .catch((r: any) => res.send(r.response.data));
+});
+app.post("/sendMoneyToMobileWallet", (req, res) => {
+  sdk
+    .sendMoneyToMobileWallet({
+      headers: { Authorization: `Bearer ${accessToken}` },
+      data: {
+        source: {
+          countryCode: "KE",
+          name: "John Doe",
+          accountNumber: "0011547896523",
+        },
+        destination: {
+          type: "mobile",
+          countryCode: "KE",
+          name: "A N.Other",
+          mobileNumber: "0763123456",
+          walletName: "Mpesa",
+        },
+        transfer: {
+          type: "MobileWallet",
+          amount: "1000",
+          currencyCode: "KES",
+          reference: "692194625798",
+          date: "2018-08-18",
+          description: "some remarks here",
+        },
+      },
+    })
+    .then((r: any) => res.send(r.data))
+    .catch((r: any) => res.send(r.response.data));
+});
+app.post("/sendMoneySwift", (req, res) => {
+  sdk
+    .sendMoneySwift({
+      headers: { Authorization: `Bearer ${accessToken}` },
+      data: {
+        source: {
+          countryCode: "KE",
+          name: "John Doe",
+          accountNumber: "0011547896523",
+        },
+        destination: {
+          type: "bank",
+          countryCode: "KE",
+          name: "A N.Other",
+          bankBic: "BOTKJPJTXXX",
+          accountNumber: "12365489",
+          addressline1: "Post Box 56",
+        },
+        transfer: {
+          type: "SWIFT",
+          amount: "10000.00",
+          currencyCode: "USD",
+          reference: "692194625798",
+          date: "2018-08-16",
+          description: "some description here",
+          chargeOption: "SELF",
+        },
+      },
+    })
+    .then((r: any) => res.send(r.data))
+    .catch((r: any) => res.send(r.response.data));
+});
+app.post("/sendMoneyPesaLinkToBank", (req, res) => {
+  sdk
+    .sendMoneyPesaLinkToBank({
+      headers: { Authorization: `Bearer ${accessToken}` },
+      data: {
+        source: {
+          countryCode: "KE",
+          name: "John Doe",
+          accountNumber: "0011547896523",
+        },
+        destination: {
+          type: "bank",
+          countryCode: "KE",
+          name: "Tom Doe",
+          bankCode: "63",
+          accountNumber: "0090207635001",
+        },
+        transfer: {
+          type: "PesaLink",
+          amount: "2000",
+          currencyCode: "KE",
+          reference: "692194625798",
+          date: "2018-08-18",
+          description: "some description",
+        },
+      },
+    })
+    .then((r: any) => res.send(r.data))
+    .catch((r: any) => res.send(r.response.data));
+});
+app.post("/sendMoneyPesaLinkToMobileNumber", (req, res) => {
+  sdk
+    .sendMoneyPesaLinkToMobileNumber({
+      headers: { Authorization: `Bearer ${accessToken}` },
+      data: {
+        source: {
+          countryCode: "KE",
+          name: "John Doe",
+          accountNumber: "0011547896523",
+        },
+        destination: {
+          type: "mobile",
+          countryCode: "KE",
+          name: "A N.Other",
+          bankCode: "01",
+          mobileNumber: "0722000000",
+        },
+        transfer: {
+          type: "PesaLink",
+          amount: "1000",
+          currencyCode: "KES",
+          description: "kskksskks",
+          reference: "692194625798",
+          date: "2018-08-19",
+        },
+      },
+    })
+    .then((r: any) => res.send(r.data))
+    .catch((r: any) => res.send(r.response.data));
+});
+app.post("/mpgsAuthenticatePayment", (req, res) => {
+  sdk
+    .mpgsAuthenticatePayment({
+      headers: { Authorization: `Bearer ${accessToken}` },
+      data: {
+        transactionReference: "NCJASSOPK101004",
+        sourceOfFunds: {
+          cardNumber:
+            "22d5fd8f8df08ba34a1dcbf84011ae783c326e9fcefd08501e40722c7aeeb946abb6255714b7289eef562748920b873be2aHMpN/qcSMMeh12GL5pxWLo9Y7fDn2lqUou0ICcBs=",
+          cardSecurity:
+            "1fd3b576cb487da80b30551c0e66ee2768a5cb5c99c121d91e4721947914c01ee919ab8943475ca5847bf796241da2448EILoGUe8QuoJsNg4Vp7JQ==",
+          cardExpiryYear: "34",
+          cardExpiryMonth: "10",
+        },
+      },
+    })
+    .then((r: any) => res.send(r.data))
+    .catch((r: any) => res.send(r.response.data));
+});
+app.post("/mpgsAuthorizePayment", (req, res) => {
+  sdk
+    .mpgsAuthorizePayment({
+      headers: { Authorization: `Bearer ${accessToken}` },
+      data: {
+        transactionReference: "NCJASSOPK101004",
+        customer: {
+          email: "john@yopmail.com",
+          firstName: "John",
+          cardFirstName: "John",
+          cardLastName: "Doe",
+          lastName: "Smith",
+          mobilePhone: "0763000000",
+        },
+        order: {
+          amount: 258.75,
+          reference: "OR1649092214608",
+          currency: "KES",
+          description: "Card payment for order OR1649092214608",
+          subMerchant: {
+            address: {
+              city: "Kisumu",
+              company: "Kilimall",
+              postalZip: "01001",
+              stateProvince: "Kisumu",
+              street: "Kilimani",
+            },
+            email: "john@yopmail.com",
+            tradingName: "Kilimall",
+            phone: "254763000000",
+            identifier: "2179103820",
+          },
+        },
+        sourceOfFunds: {
+          cardNumber:
+            "22d5fd8f8df08ba34a1dcbf84011ae783c326e9fcefd08501e40722c7aeeb946abb6255714b7289eef562748920b873be2aHMpN/qcSMMeh12GL5pxWLo9Y7fDn2lqUou0ICcBs=",
+          cardSecurity:
+            "1fd3b576cb487da80b30551c0e66ee2768a5cb5c99c121d91e4721947914c01ee919ab8943475ca5847bf796241da2448EILoGUe8QuoJsNg4Vp7JQ==",
+          cardExpiryYear: "34",
+          cardExpiryMonth: "10",
+        },
+        transaction: {
+          source: "INTERNET",
+          sourceOwner: "FINSERVE",
+        },
+      },
+    })
+    .then((r: any) => res.send(r.data))
+    .catch((r: any) => res.send(r.response.data));
+});
+app.post("/mpgsQueryPayment", (req, res) => {
+  sdk
+    .mpgsQueryPayment({
+      headers: { Authorization: `Bearer ${accessToken}` },
+      data: {
+        transactionReference: "NCJASSOPK101004",
+        orderReference: null,
+      },
+    })
+    .then((r: any) => res.send(r.data))
+    .catch((r: any) => res.send(r.response.data));
+});
+app.post("/mpgsValidatePayment", (req, res) => {
+  sdk
+    .mpgsValidatePayment({
+      headers: { Authorization: `Bearer ${accessToken}` },
+      data: {
+        transactionReference: "NCJASSOPK101004",
+        merchantMID: "TESTJENGA_MISC",
+        responseUrl:
+          "https://webhook.site/3af0e78a-e4e9-40d9-b88e-1c3d60ea5302",
+        order: {
+          reference: "OR8289289282900002",
+          amount: 258.75,
+          currency: "KES",
+        },
+        customer: {
+          cardFirstName: "John",
+          cardLastName: "Doe",
+        },
+        sourceOfFunds: {
+          cardNumber:
+            "22d5fd8f8df08ba34a1dcbf84011ae783c326e9fcefd08501e40722c7aeeb946abb6255714b7289eef562748920b873be2aHMpN/qcSMMeh12GL5pxWLo9Y7fDn2lqUou0ICcBs=",
+          cardSecurity:
+            "1fd3b576cb487da80b30551c0e66ee2768a5cb5c99c121d91e4721947914c01ee919ab8943475ca5847bf796241da2448EILoGUe8QuoJsNg4Vp7JQ==",
+          cardExpiryYear: "34",
+          cardExpiryMonth: "10",
+        },
+      },
+    })
+    .then((r: any) => res.send(r.data))
+    .catch((r: any) => res.send(r.response.data));
+});
+app.post("/mpgsRefundPayment", (req, res) => {
+  sdk
+    .mpgsRefundPayment({
+      headers: { Authorization: `Bearer ${accessToken}` },
+      data: {
+        transactionReference: "NCJASSOPK101004",
+        amount: 50,
+        merchantNote: "2179103820",
+      },
+    })
+    .then((r: any) => res.send(r.data))
+    .catch((r: any) => res.send(r.response.data));
 });
 app.listen(port, () => {
   console.log(`Jenga SDK Test App listening on port: ${port}`);

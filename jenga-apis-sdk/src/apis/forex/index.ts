@@ -10,7 +10,7 @@ export class ForexService extends Base {
    *
    * @param options
    */
-  getForexRates(options: Options): Promise<any> {
+  getForexRates<T>(options: Options): Promise<T> {
     const config = {
       ...options,
       headers: { ...options.headers },

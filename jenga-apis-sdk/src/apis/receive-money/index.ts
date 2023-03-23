@@ -11,10 +11,10 @@ export class ReceiveMoneyService extends Base {
    *
    * @param options
    */
-  receivePaymentsBillPayments(options: {
+  receivePaymentsBillPayments<T>(options: {
     headers?: any;
     data: BillPayment;
-  }): Promise<any> {
+  }): Promise<T> {
     const { biller, partnerId, payer, bill } = options.data;
     const signature = generateSignature(
       biller.billerCode + bill.amount + payer.reference + partnerId,
@@ -40,10 +40,10 @@ export class ReceiveMoneyService extends Base {
    *
    * @param options
    */
-  receivePaymentsBMerchantPayments(options: {
+  receivePaymentsBMerchantPayments<T>(options: {
     headers?: any;
     data: MerchantPayment;
-  }): Promise<any> {
+  }): Promise<T> {
     const { merchant, partner, payment } = options.data;
     const signature = generateSignature(
       merchant.till +
@@ -75,10 +75,10 @@ export class ReceiveMoneyService extends Base {
    *
    * @param options
    * */
-  billValidations(options: {
+  billValidations<T>(options: {
     headers?: any;
     data: BillValidation;
-  }): Promise<any> {
+  }): Promise<T> {
     const config = {
       ...options,
       headers: { ...options.headers },

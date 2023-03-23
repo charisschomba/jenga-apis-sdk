@@ -10,7 +10,7 @@ export class KycService extends Base {
    * This web service enables your application to query the various registrar of persons in the various countries in East Africa. Currently available for Kenya and Rwanda only.
    * @param options
    */
-  validateIdentity(options: Options): Promise<any> {
+  validateIdentity<T>(options: Options): Promise<T> {
     const { countryCode, documentNumber } = options.data.identity;
     const signature = generateSignature(
       countryCode + countryCode,

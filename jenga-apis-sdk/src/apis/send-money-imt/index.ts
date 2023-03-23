@@ -13,10 +13,10 @@ export class SendMoneyImtService extends Base {
    *
    * Kindly note in order to get a response you will need to test this in production.
    */
-  imtSendMoneyWithinEquity(options: {
+  imtSendMoneyWithinEquity<T>(options: {
     headers?: any;
     data: SendMoneyWithinEquityImtData;
-  }): Promise<any> {
+  }): Promise<T> {
     const { source, transfer } = options.data;
     const signature = generateSignature(
       source.accountNumber +
@@ -47,10 +47,10 @@ export class SendMoneyImtService extends Base {
      *
      * @param options
      */
-  imtSendMoneyToMobileWallet(options: {
+  imtSendMoneyToMobileWallet<T>(options: {
     headers?: any;
     data: SendMoneyToMobileWalletImtData;
-  }): Promise<any> {
+  }): Promise<T> {
     const { source, transfer, destination } = options.data;
     let rawText = "";
     const airtelMpesa =
@@ -88,10 +88,10 @@ export class SendMoneyImtService extends Base {
    *
    * @param options
    */
-  imtSendMoneyPesalinkToBankAccount(options: {
+  imtSendMoneyPesalinkToBankAccount<T>(options: {
     headers?: any;
     data: SendMoneyPesalinkToBankAccountImtData;
-  }): Promise<any> {
+  }): Promise<T> {
     const { source, transfer, destination } = options.data;
     const signature = generateSignature(
       transfer.amount +
@@ -122,10 +122,10 @@ export class SendMoneyImtService extends Base {
    * @param options
    *
    */
-  imtSendMoneyPesalinkToMobile(options: {
+  imtSendMoneyPesalinkToMobile<T>(options: {
     headers?: any;
     data: SendMoneyPesalinkToMobileImtData;
-  }): Promise<any> {
+  }): Promise<T> {
     const { source, transfer, destination } = options.data;
     const signature = generateSignature(
       transfer.amount +
@@ -161,6 +161,7 @@ type SendMoneyWithinEquityImtData = {
     countryCode?: string;
     mobileNumber?: string;
     email: string;
+    address: string;
   };
   destination: {
     type: string;

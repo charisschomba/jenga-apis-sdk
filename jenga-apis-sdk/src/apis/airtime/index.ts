@@ -11,7 +11,7 @@ export class AirtimeService extends Base {
    *
    * @param options
    */
-  airtimePurchase(options: Options): Promise<any> {
+  airtimePurchase<T>(options: Options): Promise<T> {
     const { telco, amount, reference } = options.data.airtime;
     const signature = generateSignature(
       telco + amount + reference,

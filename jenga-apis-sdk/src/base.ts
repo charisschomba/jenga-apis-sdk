@@ -45,19 +45,20 @@ export abstract class Base {
       headers,
     };
     if (this.enableLogging) {
-      console.info({
-        url,
-        body: config.data || {},
-        params: config.params || {},
-      });
+      // console.info({
+      //   url,
+      //   body: config.data || {},
+      //   params: config.params || {},
+      // });
+      console.info(url);
     }
     return axios(url, config);
   }
   protected withAuth<T>(config, url): Promise<T> {
     if (this.token.expiresIn && !isTokenExpired(this.token.expiresIn)) {
-      if (this.enableLogging) {
-        console.info("Setting Required Headers");
-      }
+      // if (this.enableLogging) {
+      //   console.info("Setting Required Headers");
+      // }
       return this.request(url, {
         ...config,
         headers: {
@@ -66,9 +67,9 @@ export abstract class Base {
         },
       });
     }
-    if (this.enableLogging) {
-      console.info("Refreshing Access Token");
-    }
+    // if (this.enableLogging) {
+    //   console.info("Refreshing Access Token");
+    // }
     return fetch(
       `${this.baseUrl}/authentication/api/v3/authenticate/merchant`,
       {

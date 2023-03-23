@@ -10,7 +10,7 @@ export class ReceiveMoneyQueryService extends Base {
    *
    * @param options
    */
-  getAllEazzyPayMerchants(options: Options): Promise<any> {
+  getAllEazzyPayMerchants<T>(options: Options): Promise<T> {
     const config = {
       ...options,
       headers: { ...options.headers },
@@ -31,10 +31,10 @@ export class ReceiveMoneyQueryService extends Base {
    *
    * @param options
    **/
-  queryTransactionDetails(options: {
+  queryTransactionDetails<T>(options: {
     headers?: any;
     params: { ref: string };
-  }): Promise<any> {
+  }): Promise<T> {
     const { ref } = options.params;
     delete options.params;
     const config = {
@@ -42,7 +42,7 @@ export class ReceiveMoneyQueryService extends Base {
       headers: { ...options.headers },
       method: "GET",
     };
-    const url = `v3-apis/transaction-api/v3.0/payments/details/${ref}`;
+    const url = `/v3-apis/transaction-api/v3.0/payments/details/${ref}`;
     if (this.enableAuthorization) {
       return this.withAuth(config, url);
     }
@@ -57,7 +57,7 @@ export class ReceiveMoneyQueryService extends Base {
    *
    * @param options
    */
-  getAllBillers(options: Options): Promise<any> {
+  getAllBillers<T>(options: Options): Promise<T> {
     const config = {
       ...options,
       headers: { ...options.headers },

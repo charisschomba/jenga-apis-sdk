@@ -11,10 +11,10 @@ export class SendMoneyService extends Base {
    *
    * @param options
    */
-  sendMoneyWithinEquity(options: {
+  sendMoneyWithinEquity<T>(options: {
     headers?: any;
     data: SendMoneyWithinEquityData;
-  }): Promise<any> {
+  }): Promise<T> {
     const { source, transfer } = options.data;
     const signature = generateSignature(
       source.accountNumber +
@@ -45,10 +45,10 @@ export class SendMoneyService extends Base {
    *
    * @param options
    */
-  sendMoneyToMobileWallet(options: {
+  sendMoneyToMobileWallet<T>(options: {
     headers?: any;
     data: sendMoneyToMobileWalletData;
-  }): Promise<any> {
+  }): Promise<T> {
     const { source, transfer, destination } = options.data;
     let rawText = "";
     const airtelMpesa =
@@ -85,10 +85,10 @@ export class SendMoneyService extends Base {
    *
    * @param options
    */
-  sendMoneyRtgs(options: {
+  sendMoneyRtgs<T>(options: {
     headers?: any;
     data: sendMoneyToRtgsData;
-  }): Promise<any> {
+  }): Promise<T> {
     const { source, transfer, destination } = options.data;
     const signature = generateSignature(
       transfer.reference +
@@ -118,10 +118,10 @@ export class SendMoneyService extends Base {
    *
    * @param options
    */
-  sendMoneySwift(options: {
+  sendMoneySwift<T>(options: {
     headers?: any;
     data: sendMoneyToSwiftData;
-  }): Promise<any> {
+  }): Promise<T> {
     const { source, transfer, destination } = options.data;
     const signature = generateSignature(
       transfer.reference +
@@ -151,10 +151,10 @@ export class SendMoneyService extends Base {
    *
    * This web service enables an application to send money to a PesaLink participating bank. It is restricted to Kenya.
    */
-  sendMoneyPesaLinkToBank(options: {
+  sendMoneyPesaLinkToBank<T>(options: {
     headers?: any;
     data: sendMoneyPesaLinkToBankData;
-  }): Promise<any> {
+  }): Promise<T> {
     const { source, transfer, destination } = options.data;
     const signature = generateSignature(
       transfer.amount +
@@ -183,10 +183,10 @@ export class SendMoneyService extends Base {
    * @param options
    *
    */
-  sendMoneyPesaLinkToMobileNumber(options: {
+  sendMoneyPesaLinkToMobileNumber<T>(options: {
     headers?: any;
     data: sendMoneyPesaLinkToMobileData;
-  }): Promise<any> {
+  }): Promise<T> {
     const { source, transfer, destination } = options.data;
     const signature = generateSignature(
       transfer.amount +

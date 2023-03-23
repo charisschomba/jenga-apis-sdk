@@ -3,7 +3,7 @@ import { AuthResponse } from "./types";
 
 export class AuthService extends Base {
   /** Generates access token*/
-  generateToken(): Promise<AuthResponse> {
+  generateToken<AuthResponse>(): Promise<AuthResponse> {
     return this.request("/authentication/api/v3/authenticate/merchant", {
       method: "POST",
       headers: { "Api-Key": this.apiKey },

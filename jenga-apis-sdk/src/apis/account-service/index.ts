@@ -11,7 +11,7 @@ export class AccountService extends Base {
    *
    * @param options
    * */
-  accountBalance<T>(options: Options): any {
+  accountBalance<T>(options: Options): Promise<T> {
     const { countryCode, accountId } = options.params;
     const signature = generateSignature(
       countryCode + accountId,
@@ -26,12 +26,6 @@ export class AccountService extends Base {
       },
     };
     const url = `/v3-apis/account-api/v3.0/accounts/balances/${countryCode}/${accountId}`;
-    this.enableAuthorization
-      ? this.withAuth(config, url)
-      : this.request(url, {
-          method: "GET",
-          ...config,
-        });
     if (this.enableAuthorization) {
       return this.withAuth(config, url);
     }
@@ -50,7 +44,7 @@ export class AccountService extends Base {
    * @param options
    *
    * */
-  accountMiniStatement(options: Options): Promise<any> {
+  accountMiniStatement<T>(options: Options): Promise<T> {
     const { countryCode, accountNumber } = options.params;
     const signature = generateSignature(
       countryCode + accountNumber,
@@ -78,7 +72,7 @@ export class AccountService extends Base {
    * @param options
    *
    * */
-  accountFullStatement(options: Options): Promise<any> {
+  accountFullStatement<T>(options: Options): Promise<T> {
     const { countryCode, accountNumber, toDate } = options.data;
     const signature = generateSignature(
       accountNumber + countryCode + toDate,
@@ -104,7 +98,7 @@ export class AccountService extends Base {
    *
    * @param options
    * */
-  openingClosingAccountBalance(options: Options): Promise<any> {
+  openingClosingAccountBalance<T>(options: Options): Promise<T> {
     const { countryCode, accountId, date } = options.data;
     const signature = generateSignature(
       accountId + countryCode + date,
@@ -130,7 +124,7 @@ export class AccountService extends Base {
    *
    * @param options
    */
-  accountInquiry(options: Options): Promise<any> {
+  accountInquiry<T>(options: Options): Promise<T> {
     const { countryCode, accountNumber } = options.params;
     const signature = generateSignature(
       countryCode + accountNumber,
