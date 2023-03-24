@@ -1,4 +1,4 @@
-import { AccountService, JengaApiSdk, AuthService } from "jenga-apis-sdk";
+import { AccountService, JengaApiSdk } from "jenga-apis-sdk";
 const config = {
   apiKey:
     "B/xDKDWPMX5acekuX5QZF/8JIozvr40Xd+2RABniIRfwsO7gs4UuhwPJxthWpi14Y3JfSi+8JlkRO9xuL6DuVg==",
@@ -711,14 +711,14 @@ app.get("/updateConfig", (req, res) => {
       env: "UAT",
       enableLogging: true,
       enableAuthorization: true,
-    },
-    () =>
-      sdk
-        .accountBalance({
-          params: { countryCode: "KE", accountId: "1100194977404" },
-        })
-        .then((r: any) => console.log(r.data))
-        .catch((r: any) => console.log(r.response.data))
+    }
+    // () =>
+    //   sdk
+    //     .accountBalance({
+    //       params: { countryCode: "KE", accountId: "1100194977404" },
+    //     })
+    //     .then((r: any) => console.log(r.data))
+    //     .catch((r: any) => console.log(r.response.data))
   );
   res.send({ newConfigs });
 });

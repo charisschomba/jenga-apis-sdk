@@ -1,6 +1,5 @@
 import { Base } from "./base";
 import { applyMixins } from "./utils/applyMixing";
-import { AuthService } from "./apis/auth";
 import { AccountService } from "./apis/account-service";
 import { AirtimeService } from "./apis/airtime";
 import { ForexService } from "./apis/forex";
@@ -12,7 +11,6 @@ import { SendMoneyImtService } from "./apis/send-money-imt";
 import { MpgsDirectIntegrationService } from "./apis/mpgs-direct-integration";
 
 class JengaApiSdk extends Base {}
-interface JengaApiSdk extends AuthService {}
 interface JengaApiSdk extends AccountService {}
 interface JengaApiSdk extends AirtimeService {}
 interface JengaApiSdk extends ForexService {}
@@ -24,7 +22,6 @@ interface JengaApiSdk extends SendMoneyImtService {}
 interface JengaApiSdk extends MpgsDirectIntegrationService {}
 
 applyMixins(JengaApiSdk, [
-  AuthService,
   AccountService,
   AirtimeService,
   ForexService,
@@ -36,7 +33,6 @@ applyMixins(JengaApiSdk, [
   MpgsDirectIntegrationService,
 ]);
 export {
-  AuthService,
   AccountService,
   AirtimeService,
   ForexService,

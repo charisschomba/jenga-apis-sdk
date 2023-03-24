@@ -1,29 +1,23 @@
 export const updateSdkInstance = (instance, config, callback) => {
-  if (config.apiKey) {
+  if ("apiKey" in config) {
     instance.apiKey = config.apiKey;
   }
-  if (config.merchantCode) {
+  if ("merchantCode" in config) {
     instance.merchantCode = config.merchantCode;
   }
-  if (config.consumerSecret) {
+  if ("consumerSecret" in config) {
     instance.consumerSecret = config.consumerSecret;
   }
-  if (config.privateKeyPath) {
+  if ("privateKeyPath" in config) {
     instance.privateKeyPath = config.privateKeyPath;
   }
-  if (config.env) {
-    instance.env = config.env;
-  }
-  if (config.enableLogging) {
+  if ("enableLogging" in config) {
     instance.enableLogging = config.enableLogging;
   }
-  if (config.enableAuthorization) {
+  if ("enableAuthorization" in config) {
     instance.enableAuthorization = config.enableAuthorization;
   }
-  if (config.enableAuthorization) {
-    instance.enableAuthorization = config.enableAuthorization;
-  }
-  if (config.env) {
+  if ("env" in config) {
     instance.baseUrl = BaseUrl[config.env];
   }
   if (callback) {
