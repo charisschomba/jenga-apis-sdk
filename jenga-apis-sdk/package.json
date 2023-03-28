@@ -2,11 +2,33 @@
   "name": "jenga-v3-apis-sdk",
   "version": "1.0.3",
   "main": "dist/index.js",
-  "module": "dist/index.m.js",
+  "module": "dist/index.js",
   "unpkg": "dist/index.umd.js",
   "types": "dist/index.d.ts",
+  "output": {
+    "format": [
+      "cjs",
+      "esm",
+      "umd"
+    ],
+    "fileName": "index",
+    "sourceMap": false,
+    "globals": {
+      "axios": "axios",
+      "crypto-js": "crypto-js"
+    },
+    "exports": "named"
+  },
+  "exports": {
+    "types": "./dist/index.d.ts",
+    "import": "./dist/index.js",
+    "require": "./dist/index.cjs",
+    "browser": "./dist/index.umd.js"
+  },
+  "type": "module",
   "scripts": {
-    "build": "rm -rf dist && microbundle --tsconfig tsconfig.json --no-sourcemap"
+    "build": "rm -rf dist && microbundle --tsconfig tsconfig.json --no-sourcemap",
+    "dev": "microbundle watch"  
   },
   "files": [
     "dist"

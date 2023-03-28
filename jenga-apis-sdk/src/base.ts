@@ -57,9 +57,6 @@ export abstract class Base {
   }
   protected withAuth<T>(config, url): Promise<T> {
     if (this.token.expiresIn && !isTokenExpired(this.token.expiresIn)) {
-      // if (this.enableLogging) {
-      //   console.info("Setting Required Headers");
-      // }
       return this.request(url, {
         ...config,
         headers: {
@@ -68,9 +65,6 @@ export abstract class Base {
         },
       });
     }
-    // if (this.enableLogging) {
-    //   console.info("Refreshing Access Token");
-    // }
     return fetch(
       `${this.baseUrl}/authentication/api/v3/authenticate/merchant`,
       {

@@ -22,7 +22,7 @@ export class AirtimeService extends Base {
       headers: { ...options.headers, signature },
       method: "POST",
     };
-    const url = `/v3-apis/airtime`;
+    const url = `/v3-apis/transaction-api/v3.0/airtime`;
     if (this.enableAuthorization) {
       return this.withAuth(config, url);
     }

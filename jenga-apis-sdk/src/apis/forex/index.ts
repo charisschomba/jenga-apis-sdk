@@ -16,7 +16,7 @@ export class ForexService extends Base {
       headers: { ...options.headers },
       method: "POST",
     };
-    const url = `/v3-apis/transaction-api/v3.0/foreignexchangerates`;
+    const url = `/v3-apis/transaction-api/v3.0/foreignExchangeRates`;
     if (this.enableAuthorization) {
       return this.withAuth(config, url);
     }

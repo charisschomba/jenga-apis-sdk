@@ -684,7 +684,7 @@ app.post("/mpgsValidatePayment", (req, res) => {
       },
     })
     .then((r: any) => res.send(r.data))
-    .catch((r: any) => res.send(r.response.data));
+    .catch((r: any) => res.send(r));
 });
 app.post("/mpgsRefundPayment", (req, res) => {
   sdk
