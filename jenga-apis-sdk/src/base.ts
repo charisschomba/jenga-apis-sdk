@@ -112,7 +112,9 @@ export abstract class Base {
       },
     });
   }
-
+  /**
+   * Updates the current configuration of the SDK
+   */
   updateConfig(config: UpdateConfig, callback: Function = null) {
     this.updateConfigs(config, callback);
     return {
@@ -125,6 +127,9 @@ export abstract class Base {
       enableAuthorization: this.enableAuthorization,
     };
   }
+  /**
+   * Gets the current configuration of the SDK
+   */
   getConfig() {
     return {
       apiKey: this.apiKey,
