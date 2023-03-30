@@ -13,6 +13,7 @@ export abstract class Base {
   protected enableLogging?: boolean;
   protected enableAuthorization?: boolean;
   private token: Token = { accessToken: null, expiresIn: null };
+  private verbose?: boolean;
 
   constructor(config: Config) {
     this.apiKey = config.apiKey;
@@ -22,6 +23,7 @@ export abstract class Base {
     this.privateKeyPath = config.privateKeyPath;
     this.enableLogging = false;
     this.enableAuthorization = true;
+    this.verbose = false;
     if ('enableAuthorization' in config) {
       this.enableAuthorization = config.enableAuthorization;
     }
@@ -30,6 +32,9 @@ export abstract class Base {
     }
     if ('env' in config) {
       this.baseUrl = BaseUrl[config.env];
+    }
+    if ('verbose' in config) {
+      this.verbose = config.verbose;
     }
   }
 
@@ -49,12 +54,15 @@ export abstract class Base {
       headers,
     };
     if (this.enableLogging) {
-      // console.info({
-      //   url,
-      //   body: config.data || {},
-      //   params: config.params || {},
-      // });
-      console.info(url);
+      if (this.verbose) {
+        console.info({
+          url,
+          body: config.data || {},
+          params: config.params || {},
+          headers: config.headers || {},
+        });
+      } else { console.info(url); }
+
     }
     return axios(url, config);
   }
@@ -100,6 +108,7 @@ export abstract class Base {
       privateKeyPath?: string;
       enableLogging?: boolean;
       enableAuthorization?: boolean;
+      verbose?: boolean;
     },
     callback?: Function | null
   ): Promise<T> | void {
@@ -125,6 +134,7 @@ export abstract class Base {
       merchantCode: this.merchantCode,
       consumerSecret: this.consumerSecret,
       env: this.env,
+      verbose: this.verbose,
       privateKeyPath: this.privateKeyPath,
       enableLogging: this.enableLogging,
       enableAuthorization: this.enableAuthorization,
@@ -139,6 +149,7 @@ export abstract class Base {
       merchantCode: this.merchantCode,
       consumerSecret: this.consumerSecret,
       env: this.env,
+      verbose: this.verbose,
       privateKeyPath: this.privateKeyPath,
       enableLogging: this.enableLogging,
       enableAuthorization: this.enableAuthorization,
@@ -149,10 +160,11 @@ type Config = {
   apiKey: string;
   merchantCode: string;
   consumerSecret: string;
-  env?: string;
   privateKeyPath: string;
+  env?: string;
   enableLogging?: boolean;
   enableAuthorization?: boolean;
+  verbose?: boolean;
 };
 enum BaseUrl {
   DEV = "https://api-finserve-dev.azure-api.net",
@@ -179,6 +191,7 @@ type UpdateConfig = {
   privateKeyPath?: string;
   enableLogging?: boolean;
   enableAuthorization?: boolean;
+  verbose?: boolean;
 };
 export declare interface AuthResponse {
   accessToken: string;

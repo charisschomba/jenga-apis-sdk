@@ -17,6 +17,9 @@ export const updateSdkInstance = (instance, config, callback) => {
   if ("enableLogging" in config) {
     instance.enableLogging = config.enableLogging;
   }
+  if ("verbose" in config) {
+    instance.verbose = config.verbose;
+  }
   if ("enableAuthorization" in config) {
     instance.enableAuthorization = config.enableAuthorization;
   }
