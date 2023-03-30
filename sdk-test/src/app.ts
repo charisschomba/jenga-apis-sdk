@@ -6,8 +6,8 @@ const config = {
   consumerSecret: "2KR0Mgj6Ri26X29hayKfClQ6c2Mt0V",
   privateKeyPath: "/home/chariss/dev/personal/javascript/JengaSdk/uat.pem",
   env: "UAT",
-  enableLogging: true,
-  enableAuthorization: true,
+  // enableLogging: true,
+  // enableAuthorization: true,
 };
 const accessToken = "";
 const sdk: JengaApiSdk = new JengaApiSdk(config);

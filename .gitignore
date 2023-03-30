@@ -2,3 +2,4 @@ jenga-apis-sdk/dist/
 sdk-test/dist/
 .idea
 node_modules/
+sdk-test/

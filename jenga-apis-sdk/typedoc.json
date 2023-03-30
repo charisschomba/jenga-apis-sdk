@@ -1,0 +1,15 @@
+{
+    "out": "docs/",
+    "exclude": ["node_modules"],
+    "mode": "file",
+    "includeDeclarations": true,
+    "ignoreCompilerErrors": true,
+    "excludeExternals": true,
+    "excludeNotExported": true,
+    "excludePrivate": true,
+    "excludeProtected": true,
+    "hideGenerator": true,
+    "githubPages": true,
+    "disableSources": true,
+    "name": "Jenga APIs SDK",
+}

@@ -10,8 +10,8 @@ export abstract class Base {
   protected consumerSecret: string;
   protected env?: string = BaseUrl.UAT;
   protected privateKeyPath: string;
-  protected enableLogging?: boolean = false;
-  protected enableAuthorization?: boolean = true;
+  protected enableLogging?: boolean;
+  protected enableAuthorization?: boolean;
   private token: Token = { accessToken: null, expiresIn: null };
 
   constructor(config: Config) {
@@ -20,12 +20,15 @@ export abstract class Base {
     this.consumerSecret = config.consumerSecret;
     this.env = config.env;
     this.privateKeyPath = config.privateKeyPath;
-    this.enableLogging = config.enableLogging;
-    this.enableAuthorization = config.enableAuthorization;
-    if (this.enableAuthorization) {
+    this.enableLogging = false;
+    this.enableAuthorization = true;
+    if ('enableAuthorization' in config) {
       this.enableAuthorization = config.enableAuthorization;
     }
-    if (this.env) {
+    if ('enableLogging' in config) {
+      this.enableLogging = config.enableLogging;
+    }
+    if ('env' in config) {
       this.baseUrl = BaseUrl[config.env];
     }
   }
