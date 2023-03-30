@@ -15,6 +15,8 @@ const config = {
 
 const sdk = new JengaApiSdk(config);
 
+// const sdk: JengaApiSdk = new JengaApiSdk(config);  // Typescript
+
 // Get request exapmple
   sdk
     .accountBalance({
