@@ -61,6 +61,17 @@
         you can import a service independently to consume only methods related 
         to that service. It's important to note that all imports are named imports.
       </p>
+      <p>
+        <p>
+          All methods accept an object with the following properties as a parameter:
+          <br>
+          <br>
+          <strong>headers (Optional):</strong> An object containing extra headers to be sent with the request.
+          <br>
+          <strong>params (GET request):</strong> An object containing the query parameters to be sent with the request.
+          <br>
+          <strong>data: (POST request):</strong> An object containing the body to be sent with the request.          
+        </p>
       <div class="tsd-panel tsd-typography">
         <pre>
         index.ts - using typescript
