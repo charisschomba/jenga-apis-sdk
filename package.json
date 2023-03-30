@@ -1,6 +1,21 @@
 {
   "name": "jenga-apis-sdk",
-  "version": "1.0.0",
+  "version": "1.0.4",
+  "keywords": [
+    "jenga",
+    "apis",
+    "sdk",
+    "jenga-apis-sdk"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/charisschomba/jenga-apis-sdk.git"
+  },
+  "bugs": {
+    "url": "https://github.com/charisschomba/jenga-apis-sdk/issues"
+  },
+  "homepage": "https://charisschomba.github.io/jenga-apis-sdk/index.html",
+  "author": "Chariss Chomba <charisschomba@gmail.com>",
   "main": "dist/index.js",
   "module": "dist/index.js",
   "unpkg": "dist/index.umd.js",
