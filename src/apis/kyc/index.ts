@@ -14,7 +14,7 @@ export class KycService extends Base {
     const { countryCode, documentNumber } = options.data.identity;
     const signature = generateSignature(
       countryCode + countryCode,
-      this.privateKeyPath
+      this.privateKey
     );
     const config = {
       ...options,

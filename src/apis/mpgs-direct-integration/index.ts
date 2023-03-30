@@ -1,4 +1,4 @@
-import { Base } from "src/base";
+import { Base } from "../../base";
 
 export class MpgsDirectIntegrationService extends Base {
   /**

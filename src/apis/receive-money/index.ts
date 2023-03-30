@@ -18,7 +18,7 @@ export class ReceiveMoneyService extends Base {
     const { biller, partnerId, payer, bill } = options.data;
     const signature = generateSignature(
       biller.billerCode + bill.amount + payer.reference + partnerId,
-      this.privateKeyPath
+      this.privateKey
     );
     const config = {
       ...options,
@@ -51,7 +51,7 @@ export class ReceiveMoneyService extends Base {
         payment.amount +
         payment.currency +
         payment.ref,
-      this.privateKeyPath
+      this.privateKey
     );
     const config = {
       ...options,

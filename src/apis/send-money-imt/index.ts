@@ -1,4 +1,4 @@
-import { Base } from "src/base";
+import { Base } from "../../base";
 import { generateSignature } from "src/utils/signature";
 
 export class SendMoneyImtService extends Base {
@@ -23,7 +23,7 @@ export class SendMoneyImtService extends Base {
         transfer.amount +
         transfer.currencyCode +
         transfer.reference,
-      this.privateKeyPath
+      this.privateKey
     );
     const config = {
       ...options,
@@ -67,7 +67,7 @@ export class SendMoneyImtService extends Base {
       destination.walletName === "Mpesa" || destination.walletName === "Airtel"
         ? airtelMpesa
         : airtel;
-    const signature = generateSignature(rawText, this.privateKeyPath);
+    const signature = generateSignature(rawText, this.privateKey);
     const config = {
       ...options,
       headers: { ...options.headers, signature },
@@ -99,7 +99,7 @@ export class SendMoneyImtService extends Base {
         transfer.reference +
         destination.name +
         source.accountNumber,
-      this.privateKeyPath
+      this.privateKey
     );
     const config = {
       ...options,
@@ -133,7 +133,7 @@ export class SendMoneyImtService extends Base {
         transfer.reference +
         destination.name +
         source.accountNumber,
-      this.privateKeyPath
+      this.privateKey
     );
     const config = {
       ...options,

@@ -9,7 +9,7 @@ export abstract class Base {
   protected merchantCode: string;
   protected consumerSecret: string;
   protected env?: string = BaseUrl.UAT;
-  protected privateKeyPath: string;
+  protected privateKey: string;
   protected enableLogging?: boolean;
   protected enableAuthorization?: boolean;
   private token: Token = { accessToken: null, expiresIn: null };
@@ -20,7 +20,7 @@ export abstract class Base {
     this.merchantCode = config.merchantCode;
     this.consumerSecret = config.consumerSecret;
     this.env = config.env;
-    this.privateKeyPath = config.privateKeyPath;
+    this.privateKey = config.privateKey;
     this.enableLogging = false;
     this.enableAuthorization = true;
     this.verbose = false;
@@ -105,7 +105,7 @@ export abstract class Base {
       merchantCode?: string;
       consumerSecret?: string;
       env?: string;
-      privateKeyPath?: string;
+      privateKey?: string;
       enableLogging?: boolean;
       enableAuthorization?: boolean;
       verbose?: boolean;
@@ -135,7 +135,7 @@ export abstract class Base {
       consumerSecret: this.consumerSecret,
       env: this.env,
       verbose: this.verbose,
-      privateKeyPath: this.privateKeyPath,
+      privateKey: this.privateKey,
       enableLogging: this.enableLogging,
       enableAuthorization: this.enableAuthorization,
     };
@@ -150,7 +150,7 @@ export abstract class Base {
       consumerSecret: this.consumerSecret,
       env: this.env,
       verbose: this.verbose,
-      privateKeyPath: this.privateKeyPath,
+      privateKey: this.privateKey,
       enableLogging: this.enableLogging,
       enableAuthorization: this.enableAuthorization,
     };
@@ -160,7 +160,7 @@ type Config = {
   apiKey: string;
   merchantCode: string;
   consumerSecret: string;
-  privateKeyPath: string;
+  privateKey: string;
   env?: string;
   enableLogging?: boolean;
   enableAuthorization?: boolean;
@@ -188,7 +188,7 @@ type UpdateConfig = {
   merchantCode?: string;
   consumerSecret?: string;
   env?: string;
-  privateKeyPath?: string;
+  privateKey?: string;
   enableLogging?: boolean;
   enableAuthorization?: boolean;
   verbose?: boolean;

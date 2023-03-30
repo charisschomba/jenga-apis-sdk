@@ -16,7 +16,7 @@
   "excludeNotDocumented": true,
     "excludeNotDocumentedKinds": [
         "Property",
-        "Interface",
-        "TypeAlias",
+        // "Interface",
+        // "TypeAlias",
     ],
 }

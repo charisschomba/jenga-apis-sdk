@@ -15,7 +15,7 @@ export class AirtimeService extends Base {
     const { telco, amount, reference } = options.data.airtime;
     const signature = generateSignature(
       telco + amount + reference,
-      this.privateKeyPath
+      this.privateKey
     );
     const config = {
       ...options,

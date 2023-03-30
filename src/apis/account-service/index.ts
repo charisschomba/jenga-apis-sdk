@@ -15,7 +15,7 @@ export class AccountService extends Base {
     const { countryCode, accountId } = options.params;
     const signature = generateSignature(
       countryCode + accountId,
-      this.privateKeyPath
+      this.privateKey
     );
     delete options.params;
     const config = {
@@ -48,7 +48,7 @@ export class AccountService extends Base {
     const { countryCode, accountNumber } = options.params;
     const signature = generateSignature(
       countryCode + accountNumber,
-      this.privateKeyPath
+      this.privateKey
     );
     delete options.params;
     const config = {
@@ -76,7 +76,7 @@ export class AccountService extends Base {
     const { countryCode, accountNumber, toDate } = options.data;
     const signature = generateSignature(
       accountNumber + countryCode + toDate,
-      this.privateKeyPath
+      this.privateKey
     );
     const config = {
       ...options,
@@ -102,7 +102,7 @@ export class AccountService extends Base {
     const { countryCode, accountId, date } = options.data;
     const signature = generateSignature(
       accountId + countryCode + date,
-      this.privateKeyPath
+      this.privateKey
     );
     const config = {
       ...options,
@@ -128,7 +128,7 @@ export class AccountService extends Base {
     const { countryCode, accountNumber } = options.params;
     const signature = generateSignature(
       countryCode + accountNumber,
-      this.privateKeyPath
+      this.privateKey
     );
     delete options.params;
     const config = {
