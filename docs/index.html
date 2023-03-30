@@ -71,64 +71,13 @@
           <strong>params (GET request):</strong> An object containing the query parameters to be sent with the request.
           <br>
           <strong>data: (POST request):</strong> An object containing the body to be sent with the request.          
-        </p>
+        </p><br>
         <p>Get Started: <strong>npm i jenga-apis-sdk</strong></p>
+        <br>
       <div class="tsd-panel tsd-typography">
-        <pre>
-        index.ts - using typescript
-    <code class="language-typescript">
-        import { JengaApiSdk } from "jenga-apis-sdk";
-        const config = {
-        apiKey: "your api key"",
-        merchantCode: "your merchant code",
-        consumerSecret: "your consumer secret",
-        privateKeyPath: "path to your private key",
-        verbose: true, //Optional defaults to false
-        enableLogging: true, //Optional defaults to false
-        env: "UAT or PROD", //Optional defaults to UAT
-        enableAuthorization: false, //Optional defaults to true
-        // set to false if you want to handle setting 
-        // the Authorization header yourself
-        };
-        const sdk: JengaApiSdk = new JengaApiSdk(config);
-        sdk
-        .accountBalance({
-        params: { countryCode: "KE", accountId: "1100194977404" },
-        }).then((r: any) {console.log(r.data); })
-        .catch((r: any) {console.log(r.response.data);});
-    </code>
-   </pre>
-        <pre style="margin-top: 1rem;">
-        index.js - using without typescript
-    <code>
-        const { KycService } = require("jenga-apis-sdk");
-        const config = {
-        apiKey: "your api key"",
-        merchantCode: "your merchant code",
-        consumerSecret: "your consumer secret",
-        privateKeyPath: "path to your private key",
-        verbose: true, //Optional defaults to false
-        enableLogging: true, //Optional defaults to false
-        env: "UAT or PROD", //Optional defaults to UAT
-        enableAuthorization: false, //Optional defaults to true
-        // set to false if you want to handle setting 
-        // the Authorization header yourself
-        };
-        const sdk = new KycService(config);
-        sdk
-        .validateIdentity({
-        data: {
-        identity: {
-        documentType: "ALIENID",
-        firstName: "John",
-        lastName: "Doe",
-        dateOfBirth: "1970-01-30",
-        documentNumber: "123456",
-        },
-        countryCode: "KE",}}).then((r) {console.log(r.data)})
-        .catch((r) {console.log(r.response.data);});
-    </code>
-   </pre>
+        <div>
+          <script src="https://gist.github.com/charisschomba/393eb0c73c982ecf79d05c4f70cff3e8.js"></script>
+        </div>
       </div>
     </div>
     <div class="col-4 col-menu menu-sticky-wrap menu-highlight">
