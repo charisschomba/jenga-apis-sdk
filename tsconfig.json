@@ -12,11 +12,4 @@
   },
   "include": ["src/**/*"],
   "exclude": ["node_modules", "test",  "lib", "**/*spec.ts"],
-  "excludeProtected": true,
-  "excludeNotDocumented": true,
-    "excludeNotDocumentedKinds": [
-        "Property",
-        // "Interface",
-        // "TypeAlias",
-    ],
 }

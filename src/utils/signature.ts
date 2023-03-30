@@ -8,6 +8,6 @@ export const generateSignature = (rawText, privateKey) => {
     const signature = sign.sign(privateKey, "base64");
     return signature;
   } catch (error) {
-    throw new Error(error.toString());
+    throw new Error("Error while generating signature");
   }
 };

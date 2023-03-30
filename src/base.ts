@@ -156,14 +156,25 @@ export abstract class Base {
     };
   }
 }
-type Config = {
+/**
+ * Configuration options for the AccountService.
+ */
+interface Config {
+  // The API key to use for requests.
   apiKey: string;
+  // The merchant code to use for requests.
   merchantCode: string;
+  // The consumer secret to use for requests.
   consumerSecret: string;
+  // The private key to use for requests.
   privateKey: string;
+  // The environment to use for requests.
   env?: string;
+  // Enable logging
   enableLogging?: boolean;
+  // Enable authorization
   enableAuthorization?: boolean;
+  // Enable verbose logging
   verbose?: boolean;
 };
 enum BaseUrl {
@@ -171,19 +182,22 @@ enum BaseUrl {
   UAT = "https://uat.finserve.africa",
   PROD = "https://api.finserve.africa",
 }
-type Options = {
+interface Options {
+  // The HTTP headers to use for the request.
   headers?: any;
+  // The HTTP body to use for the request.
   data?: any;
+  // The HTTP query parameters to use for the request.
   params?: any;
 };
-type Token = {
+interface Token {
   accessToken: string | null;
   expiresIn: string | null;
   refreshToken?: string;
   tokenType?: string;
   issuedAt?: string;
 };
-type UpdateConfig = {
+interface UpdateConfig {
   apiKey?: string;
   merchantCode?: string;
   consumerSecret?: string;
