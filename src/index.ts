@@ -19,7 +19,7 @@ interface JengaApiSdk extends ReceiveMoneyQueryService {}
 interface JengaApiSdk extends ReceiveMoneyService {}
 interface JengaApiSdk extends SendMoneyService {}
 interface JengaApiSdk extends SendMoneyImtService {}
-interface JengaApiSdk extends MpgsDirectIntegrationService {}
+// interface JengaApiSdk extends MpgsDirectIntegrationService {}
 
 applyMixins(JengaApiSdk, [
   AccountService,
@@ -30,7 +30,7 @@ applyMixins(JengaApiSdk, [
   ReceiveMoneyService,
   SendMoneyService,
   SendMoneyImtService,
-  MpgsDirectIntegrationService,
+  // MpgsDirectIntegrationService,
 ]);
 export {
   AccountService,
@@ -41,6 +41,6 @@ export {
   ReceiveMoneyService,
   SendMoneyService,
   SendMoneyImtService,
-  MpgsDirectIntegrationService,
+  // MpgsDirectIntegrationService,
   JengaApiSdk,
 };

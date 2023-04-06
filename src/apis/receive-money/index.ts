@@ -114,4 +114,5 @@ type BillValidation = {
   customerRefNumber: string;
   amount: string;
   amountCurrency: string;
+  countryCode: string;
 };

@@ -197,6 +197,7 @@ type SendMoneyToMobileWalletImtData = {
     countryCode?: string;
     mobileNumber?: string;
     email: string;
+    address: string;
   };
   destination: {
     type: string;
@@ -242,7 +243,7 @@ type SendMoneyPesalinkToBankAccountImtData = {
     documentType: string;
     documentNumber: string;
     email?: string;
-    address?: string;
+    address: string;
   };
   transfer: {
     type: string;
@@ -274,11 +275,12 @@ type SendMoneyPesalinkToMobileImtData = {
     name: string;
     bankCode: string;
     email?: string;
-    address?: string;
+    address: string;
     accountNumber: string;
     mobileNumber: string;
     documentType: string;
     documentNumber: string;
+    
   };
   transfer: {
     type: string;

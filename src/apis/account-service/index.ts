@@ -17,6 +17,7 @@ export class AccountService extends Base {
       countryCode + accountId,
       this.privateKeyPath
     );
+    const parameters = options.params;
     delete options.params;
     const config = {
       ...options,
@@ -24,15 +25,16 @@ export class AccountService extends Base {
         ...options.headers,
         signature,
       },
+      parameters
     };
     const url = `/v3-apis/account-api/v3.0/accounts/balances/${countryCode}/${accountId}`;
     if (this.enableAuthorization) {
-      return this.withAuth(config, url);
+      return this.withAuth(config, url, parameters);
     }
     return this.request(url, {
       method: "GET",
       ...config,
-    });
+    }, parameters);
   }
   /**
    * Account MINI Statement
@@ -50,6 +52,7 @@ export class AccountService extends Base {
       countryCode + accountNumber,
       this.privateKeyPath
     );
+    const parameters = options.params;
     delete options.params;
     const config = {
       ...options,
@@ -58,9 +61,9 @@ export class AccountService extends Base {
     };
     const url = `/v3-apis/account-api/v3.0/accounts/miniStatement/${countryCode}/${accountNumber}`;
     if (this.enableAuthorization) {
-      return this.withAuth(config, url);
+      return this.withAuth(config, url, parameters);
     }
-    return this.request(url, config);
+    return this.request(url, config, parameters);
   }
   /**
    * Account Full Statement
@@ -130,6 +133,7 @@ export class AccountService extends Base {
       countryCode + accountNumber,
       this.privateKeyPath
     );
+    const parameters = options.params;
     delete options.params;
     const config = {
       ...options,
@@ -138,9 +142,9 @@ export class AccountService extends Base {
     };
     const url = `/v3-apis/account-api/v3.0/accounts/search/${countryCode}/${accountNumber}`;
     if (this.enableAuthorization) {
-      return this.withAuth(config, url);
+      return this.withAuth(config, url, parameters);
     }
-    return this.request(url, config);
+    return this.request(url, config, parameters);
   }
 }
 type Options = {

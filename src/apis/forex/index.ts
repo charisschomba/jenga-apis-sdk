@@ -34,4 +34,5 @@ type Forex = {
   currencyCode: string;
   amount: number;
   toCurrency: string;
+  accountNumber: string;
 };

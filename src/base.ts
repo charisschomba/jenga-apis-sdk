@@ -40,8 +40,11 @@ export abstract class Base {
 
   protected request<T>(
     endpoint: string,
-    options?: RequestInit | Options
+    options?: RequestInit | Options,
+    parameters = {}
   ): Promise<T> {
+    // @ts-ignore  
+    const reqParams = options?.params || {};
     const url = `${this.baseUrl}${endpoint}`;
     const headers = {
       "Content-Type": "application/json",
@@ -55,18 +58,18 @@ export abstract class Base {
     };
     if (this.enableLogging) {
       if (this.verbose) {
-        console.info({
+        console.info("Request: ",{
           url,
           body: config.data || {},
-          params: config.params || {},
+          params: Object.keys(reqParams).length == 0 ? parameters : config.params,
           headers: config.headers || {},
         });
-      } else { console.info(url); }
+      } else { console.info("Request Url: ", url); }
 
     }
     return axios(url, config);
   }
-  protected withAuth<T>(config, url): Promise<T> {
+  protected withAuth<T>(config, url, parameters = {}): Promise<T> {
     if (this.token.expiresIn && !isTokenExpired(this.token.expiresIn)) {
       return this.request(url, {
         ...config,
@@ -74,7 +77,7 @@ export abstract class Base {
           ...config.headers,
           Authorization: `Bearer ${this.token.accessToken}`,
         },
-      });
+      }, parameters);
     }
     return fetch(
       `${this.baseUrl}/authentication/api/v3/authenticate/merchant`,
@@ -85,7 +88,7 @@ export abstract class Base {
           merchantCode: this.merchantCode,
           consumerSecret: this.consumerSecret,
         },
-      }
+      },
     ).then((res: any) => {
       this.token = res.data;
       return this.request(url, {
@@ -95,7 +98,7 @@ export abstract class Base {
           ...config.headers,
           Authorization: `Bearer ${res.data.accessToken}`,
         },
-      });
+      }, parameters);
     });
   }
 

@@ -36,6 +36,7 @@ export class ReceiveMoneyQueryService extends Base {
     params: { ref: string };
   }): Promise<T> {
     const { ref } = options.params;
+    const parameters = options.params;
     delete options.params;
     const config = {
       ...options,
@@ -44,9 +45,9 @@ export class ReceiveMoneyQueryService extends Base {
     };
     const url = `/v3-apis/transaction-api/v3.0/payments/details/${ref}`;
     if (this.enableAuthorization) {
-      return this.withAuth(config, url);
+      return this.withAuth(config, url, parameters,);
     }
-    return this.request(url, config);
+    return this.request(url, config, parameters);
   }
   /**
    * Get All Billers

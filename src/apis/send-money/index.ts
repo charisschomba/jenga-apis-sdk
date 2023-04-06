@@ -257,12 +257,15 @@ type sendMoneyToRtgsData = {
     name: string;
     accountNumber: string;
     countryCode: string;
+    sourceCurrency: string;
   };
   destination: {
     type: string;
     countryCode: string;
+    currency: string;
     name: string;
     bankCode: string;
+    bankBic: string;
     accountNumber: string;
   };
   transfer: {
@@ -279,11 +282,13 @@ type sendMoneyToSwiftData = {
     name: string;
     accountNumber: string;
     countryCode: string;
+    sourceCurrency: string;
   };
   destination: {
     type: string;
     countryCode: string;
     name: string;
+    currency: string;
     bankBic: string;
     accountNumber: string;
     addressline1: string;
@@ -331,7 +336,7 @@ type sendMoneyPesaLinkToMobileData = {
     countryCode: string;
     name: string;
     bankCode: string;
-    mobileNumber: string;
+    accountNumber: string;
   };
   transfer: {
     type: string;

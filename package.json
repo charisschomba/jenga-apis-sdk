@@ -1,6 +1,6 @@
 {
   "name": "jenga-apis-sdk",
-  "version": "1.0.4",
+  "version": "1.0.7",
   "keywords": [
     "jenga",
     "apis",
@@ -51,6 +51,7 @@
   ],
   "license": "MIT",
   "devDependencies": {
+    "@types/node": "^18.15.11",
     "express": "^4.18.2",
     "microbundle": "^0.15.1",
     "nodemon": "^2.0.22",
