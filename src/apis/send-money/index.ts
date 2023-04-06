@@ -1,4 +1,4 @@
-import { Base } from "src/base";
+import { Base } from "../../base";
 import { generateSignature } from "src/utils/signature";
 
 export class SendMoneyService extends Base {
